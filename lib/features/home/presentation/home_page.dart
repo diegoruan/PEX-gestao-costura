@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../core/routes/app_routes.dart';
 import '../../../core/theme/app_dimens.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../shared/widgets/botao_primario.dart';
@@ -31,6 +33,11 @@ class HomePage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: AppSpacing.xxl),
+            BotaoPrimario(
+              texto: 'Clientes',
+              onPressed: () => context.pushNamed(AppRoutes.clientes),
+            ),
+            const SizedBox(height: AppSpacing.md),
             BotaoPrimario(
               texto: 'Sair',
               onPressed: () =>

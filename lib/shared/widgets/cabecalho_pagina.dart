@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/routes/app_routes.dart';
 import '../../core/theme/app_assets.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_dimens.dart';
@@ -24,33 +26,39 @@ class CabecalhoPagina extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        AppSpacing.lg,
-        AppSpacing.sm,
-        AppSpacing.lg,
-        AppSpacing.lg,
-      ),
-      child: SizedBox(
-        height: AppSizes.botaoIcone,
-        child: NavigationToolbar(
-          leading: BotaoIcone(
-            descricao: 'Voltar',
-            estilo: estiloBotoes,
-            icone: const IconeSvg(
-              AppAssets.iconeVoltar,
-              tamanho: AppSizes.iconeBotao,
-              cor: AppColors.textoPrincipal,
+    // Fundo claro no topo: ícones da barra de status escuros.
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.dark,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(
+          AppSpacing.lg,
+          AppSpacing.sm,
+          AppSpacing.lg,
+          AppSpacing.lg,
+        ),
+        child: SizedBox(
+          height: AppSizes.botaoIcone,
+          child: NavigationToolbar(
+            leading: BotaoIcone(
+              descricao: 'Voltar',
+              estilo: estiloBotoes,
+              icone: const IconeSvg(
+                AppAssets.iconeVoltar,
+                tamanho: AppSizes.iconeBotao,
+                cor: AppColors.textoPrincipal,
+              ),
+              onPressed: () => context.canPop()
+                  ? context.pop()
+                  : context.goNamed(AppRoutes.home),
             ),
-            onPressed: () => context.pop(),
-          ),
-          middle: titulo == null
-              ? null
-              : Text(titulo!, style: AppTextStyles.tituloPagina),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            spacing: AppSpacing.sm,
-            children: acoes,
+            middle: titulo == null
+                ? null
+                : Text(titulo!, style: AppTextStyles.tituloPagina),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              spacing: AppSpacing.sm,
+              children: acoes,
+            ),
           ),
         ),
       ),

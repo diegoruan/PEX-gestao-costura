@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import 'app.dart';
 import 'features/auth/data/auth_repository.dart';
+import 'features/clientes/data/cliente_repository.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -15,5 +16,10 @@ Future<void> main() async {
   Intl.defaultLocale = 'pt_BR';
   await initializeDateFormatting('pt_BR');
 
-  runApp(App(authRepository: AuthRepository()));
+  runApp(
+    App(
+      authRepository: AuthRepository(),
+      clienteRepository: ClienteRepository(),
+    ),
+  );
 }
