@@ -20,7 +20,9 @@ class CampoTexto extends StatefulWidget {
     this.senha = false,
     this.enabled = true,
     this.textCapitalization = TextCapitalization.none,
-  });
+    this.minLines,
+    this.maxLines = 1,
+  }) : assert(!senha || maxLines == 1, 'Campo de senha tem uma linha só');
 
   final String rotulo;
   final TextEditingController controller;
@@ -33,6 +35,10 @@ class CampoTexto extends StatefulWidget {
   final bool senha;
   final bool enabled;
   final TextCapitalization textCapitalization;
+
+  /// Para textos longos (observações), use `minLines: 3, maxLines: null`.
+  final int? minLines;
+  final int? maxLines;
 
   @override
   State<CampoTexto> createState() => _CampoTextoState();
@@ -62,6 +68,8 @@ class _CampoTextoState extends State<CampoTexto> {
             enabled: widget.enabled,
             obscureText: _ocultarTexto,
             textCapitalization: widget.textCapitalization,
+            minLines: widget.minLines,
+            maxLines: widget.maxLines,
             autocorrect: !widget.senha,
             enableSuggestions: !widget.senha,
             style: AppTextStyles.textoCampo,

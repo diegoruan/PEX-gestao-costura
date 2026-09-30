@@ -6,6 +6,7 @@ abstract final class Formatadores {
   static final _data = DateFormat('dd/MM/yyyy', 'pt_BR');
   static final _dataHora = DateFormat('dd/MM/yyyy HH:mm', 'pt_BR');
   static final _mesAno = DateFormat('MMMM/yyyy', 'pt_BR');
+  static final _mesAnoExtenso = DateFormat("MMMM 'de' yyyy", 'pt_BR');
 
   /// 1240.5 -> "R$ 1.240,50"
   static String moeda(num valor) => _moeda.format(valor);
@@ -17,4 +18,7 @@ abstract final class Formatadores {
 
   /// Útil no fechamento mensal: DateTime(2026, 9) -> "setembro/2026"
   static String mesAno(DateTime data) => _mesAno.format(data);
+
+  /// DateTime(2025, 3) -> "março de 2025"
+  static String mesAnoExtenso(DateTime data) => _mesAnoExtenso.format(data);
 }
