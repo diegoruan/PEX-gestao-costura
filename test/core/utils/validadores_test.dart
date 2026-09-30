@@ -21,6 +21,45 @@ void main() {
     });
   });
 
+  group('Validadores.nome', () {
+    test('exige pelo menos 2 caracteres', () {
+      expect(Validadores.nome('A'), isNotNull);
+      expect(Validadores.nome('Al'), isNull);
+    });
+
+    test('rejeita vazio e só espaços', () {
+      expect(Validadores.nome(null), isNotNull);
+      expect(Validadores.nome(''), isNotNull);
+      expect(Validadores.nome('    '), isNotNull);
+      expect(Validadores.nome(' A '), isNotNull);
+    });
+  });
+
+  group('Validadores.telefoneOpcional', () {
+    test('aceita vazio, porque o campo é opcional', () {
+      expect(Validadores.telefoneOpcional(null), isNull);
+      expect(Validadores.telefoneOpcional(''), isNull);
+      expect(Validadores.telefoneOpcional('   '), isNull);
+    });
+
+    test('aceita formatos comuns', () {
+      expect(Validadores.telefoneOpcional('(11) 9 8765-4321'), isNull);
+      expect(Validadores.telefoneOpcional('11987654321'), isNull);
+      expect(Validadores.telefoneOpcional('+55 11 98765-4321'), isNull);
+      expect(Validadores.telefoneOpcional('3456-7890'), isNull);
+    });
+
+    test('rejeita letras e símbolos estranhos', () {
+      expect(Validadores.telefoneOpcional('11 9abc-4321'), isNotNull);
+      expect(Validadores.telefoneOpcional('11#98765'), isNotNull);
+    });
+
+    test('rejeita quantidade de dígitos fora do esperado', () {
+      expect(Validadores.telefoneOpcional('1234'), isNotNull);
+      expect(Validadores.telefoneOpcional('+55 11 98765-43210'), isNotNull);
+    });
+  });
+
   group('Validadores.confirmacaoSenha', () {
     final validar = Validadores.confirmacaoSenha(() => 'segredo1');
 
