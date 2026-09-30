@@ -1,0 +1,15 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Cada usuário só enxerga e altera os próprios dados.
+    match /usuarios/{uid}/{documento=**} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+
+    // Todo o resto fica fechado.
+    match /{documento=**} {
+      allow read, write: if false;
+    }
+  }
+}

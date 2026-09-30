@@ -43,6 +43,8 @@ dependencies:
   flutter_svg: ^2.3.0
   flutter_localizations:
     sdk: flutter
+  cloud_firestore: ^6.10.0
+  bloc_concurrency: ^0.3.0
 
 dev_dependencies:
   flutter_test:
