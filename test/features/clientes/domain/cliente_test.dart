@@ -7,7 +7,10 @@ void main() {
   final cliente = Cliente(
     id: 'abc',
     nome: 'Ana Clara',
+    apelido: 'Aninha',
     telefone: '(11) 9 8765-4321',
+    email: 'ana@email.com',
+    endereco: 'Centro, Joinville',
     observacoes: 'Tamanho P',
     criadoEm: criadoEm,
   );
@@ -16,7 +19,10 @@ void main() {
     test('gera os campos do documento, sem o id', () {
       expect(cliente.toMap(), {
         'nome': 'Ana Clara',
+        'apelido': 'Aninha',
         'telefone': '(11) 9 8765-4321',
+        'email': 'ana@email.com',
+        'endereco': 'Centro, Joinville',
         'observacoes': 'Tamanho P',
         'ativo': true,
         'criadoEm': Timestamp.fromDate(criadoEm),
@@ -34,7 +40,10 @@ void main() {
         'nome': 'Pedro',
         'criadoEm': Timestamp.fromDate(criadoEm),
       });
+      expect(lido.apelido, isNull);
       expect(lido.telefone, isNull);
+      expect(lido.email, isNull);
+      expect(lido.endereco, isNull);
       expect(lido.observacoes, isNull);
       expect(lido.ativo, isTrue);
     });
@@ -49,18 +58,41 @@ void main() {
     test('altera só o que foi passado', () {
       final editado = cliente.copyWith(nome: 'Ana C.');
       expect(editado.nome, 'Ana C.');
+      expect(editado.apelido, cliente.apelido);
       expect(editado.telefone, cliente.telefone);
+      expect(editado.email, cliente.email);
+      expect(editado.endereco, cliente.endereco);
       expect(editado.id, cliente.id);
       expect(editado.criadoEm, cliente.criadoEm);
     });
 
     test('consegue limpar campos opcionais', () {
       final editado = cliente.copyWith(
+        apelido: () => null,
         telefone: () => null,
+        email: () => null,
+        endereco: () => null,
         observacoes: () => null,
       );
+      expect(editado.apelido, isNull);
       expect(editado.telefone, isNull);
+      expect(editado.email, isNull);
+      expect(editado.endereco, isNull);
       expect(editado.observacoes, isNull);
+    });
+  });
+
+  group('nome de exibição', () {
+    final semApelido = cliente.copyWith(apelido: () => null);
+
+    test('na lista, o apelido substitui o nome', () {
+      expect(cliente.nomeExibicao, 'Aninha');
+      expect(semApelido.nomeExibicao, 'Ana Clara');
+    });
+
+    test('no detalhe, mostra "Nome (Apelido)"', () {
+      expect(cliente.nomeComApelido, 'Ana Clara (Aninha)');
+      expect(semApelido.nomeComApelido, 'Ana Clara');
     });
   });
 

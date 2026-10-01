@@ -14,6 +14,24 @@ void main() {
     });
   });
 
+  group('Validadores.emailOpcional', () {
+    test('aceita vazio, porque o campo é opcional', () {
+      expect(Validadores.emailOpcional(null), isNull);
+      expect(Validadores.emailOpcional(''), isNull);
+      expect(Validadores.emailOpcional('   '), isNull);
+    });
+
+    test('aceita e-mail válido, ignorando espaços nas pontas', () {
+      expect(Validadores.emailOpcional('maria@email.com'), isNull);
+      expect(Validadores.emailOpcional(' maria@email.com '), isNull);
+    });
+
+    test('rejeita formato inválido', () {
+      expect(Validadores.emailOpcional('maria@'), isNotNull);
+      expect(Validadores.emailOpcional('maria email.com'), isNotNull);
+    });
+  });
+
   group('Validadores.senha', () {
     test('exige no mínimo 6 caracteres', () {
       expect(Validadores.senha('12345'), isNotNull);

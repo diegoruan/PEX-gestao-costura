@@ -117,7 +117,10 @@ void main() {
       setUp: () => when(
         () => repository.cadastrar(
           nome: 'Carla',
+          apelido: 'Carlinha',
           telefone: '11 99999-0000',
+          email: 'carla@email.com',
+          endereco: 'Centro, Joinville',
           observacoes: null,
         ),
       ).thenAnswer((_) async {}),
@@ -126,7 +129,10 @@ void main() {
       act: (bloc) => bloc.add(
         const ClienteCadastroSolicitado(
           nome: 'Carla',
+          apelido: 'Carlinha',
           telefone: '11 99999-0000',
+          email: 'carla@email.com',
+          endereco: 'Centro, Joinville',
         ),
       ),
       expect: () => [
@@ -136,7 +142,10 @@ void main() {
       verify: (_) => verify(
         () => repository.cadastrar(
           nome: 'Carla',
+          apelido: 'Carlinha',
           telefone: '11 99999-0000',
+          email: 'carla@email.com',
+          endereco: 'Centro, Joinville',
           observacoes: null,
         ),
       ).called(1),
@@ -147,7 +156,10 @@ void main() {
       setUp: () => when(
         () => repository.cadastrar(
           nome: any(named: 'nome'),
+          apelido: any(named: 'apelido'),
           telefone: any(named: 'telefone'),
+          email: any(named: 'email'),
+          endereco: any(named: 'endereco'),
           observacoes: any(named: 'observacoes'),
         ),
       ).thenThrow(const Falha('Sem permissão.')),
