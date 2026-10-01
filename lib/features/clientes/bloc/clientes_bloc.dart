@@ -51,7 +51,10 @@ class ClientesBloc extends Bloc<ClientesEvent, ClientesState> {
       concluida: AcaoCliente.salvo,
       acao: () => _clienteRepository.cadastrar(
         nome: event.nome,
+        apelido: event.apelido,
         telefone: event.telefone,
+        email: event.email,
+        endereco: event.endereco,
         observacoes: event.observacoes,
       ),
     );

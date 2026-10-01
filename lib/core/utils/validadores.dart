@@ -16,6 +16,13 @@ abstract final class Validadores {
     return null;
   }
 
+  static String? emailOpcional(String? valor) {
+    final email = valor?.trim() ?? '';
+    if (email.isEmpty) return null;
+    if (!_regexEmail.hasMatch(email)) return 'E-mail inválido';
+    return null;
+  }
+
   static String? senha(String? valor) {
     if (valor == null || valor.isEmpty) return 'Informe sua senha';
     if (valor.length < tamanhoMinimoSenha) {

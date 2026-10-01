@@ -18,8 +18,8 @@ class ClienteCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final telefone = cliente.telefone;
     return CartaoItemLista(
-      inicio: AvatarIniciais(nome: cliente.nome),
-      titulo: cliente.nome,
+      inicio: AvatarIniciais(nome: cliente.nomeExibicao),
+      titulo: cliente.nomeExibicao,
       onTap: onTap,
       conteudo: telefone == null
           ? null

@@ -17,16 +17,29 @@ final class ClientesIniciado extends ClientesEvent {
 final class ClienteCadastroSolicitado extends ClientesEvent {
   const ClienteCadastroSolicitado({
     required this.nome,
+    this.apelido,
     this.telefone,
+    this.email,
+    this.endereco,
     this.observacoes,
   });
 
   final String nome;
+  final String? apelido;
   final String? telefone;
+  final String? email;
+  final String? endereco;
   final String? observacoes;
 
   @override
-  List<Object?> get props => [nome, telefone, observacoes];
+  List<Object?> get props => [
+    nome,
+    apelido,
+    telefone,
+    email,
+    endereco,
+    observacoes,
+  ];
 }
 
 final class ClienteEdicaoSolicitada extends ClientesEvent {

@@ -35,7 +35,10 @@ class ClienteFormPage extends StatefulWidget {
 class _ClienteFormPageState extends State<ClienteFormPage> {
   final _formKey = GlobalKey<FormState>();
   final _nomeController = TextEditingController();
+  final _apelidoController = TextEditingController();
   final _telefoneController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _enderecoController = TextEditingController();
   final _observacoesController = TextEditingController();
 
   /// Cliente sendo editado, como estava antes das alterações.
@@ -50,7 +53,10 @@ class _ClienteFormPageState extends State<ClienteFormPage> {
   @override
   void dispose() {
     _nomeController.dispose();
+    _apelidoController.dispose();
     _telefoneController.dispose();
+    _emailController.dispose();
+    _enderecoController.dispose();
     _observacoesController.dispose();
     super.dispose();
   }
@@ -65,7 +71,10 @@ class _ClienteFormPageState extends State<ClienteFormPage> {
     if (cliente == null) return;
     _original = cliente;
     _nomeController.text = cliente.nome;
+    _apelidoController.text = cliente.apelido ?? '';
     _telefoneController.text = cliente.telefone ?? '';
+    _emailController.text = cliente.email ?? '';
+    _enderecoController.text = cliente.endereco ?? '';
     _observacoesController.text = cliente.observacoes ?? '';
   }
 
@@ -79,7 +88,10 @@ class _ClienteFormPageState extends State<ClienteFormPage> {
       bloc.add(
         ClienteCadastroSolicitado(
           nome: _nomeController.text,
+          apelido: _apelidoController.text,
           telefone: _telefoneController.text,
+          email: _emailController.text,
+          endereco: _enderecoController.text,
           observacoes: _observacoesController.text,
         ),
       );
@@ -88,7 +100,10 @@ class _ClienteFormPageState extends State<ClienteFormPage> {
         ClienteEdicaoSolicitada(
           original.copyWith(
             nome: _nomeController.text,
+            apelido: () => _apelidoController.text,
             telefone: () => _telefoneController.text,
+            email: () => _emailController.text,
+            endereco: () => _enderecoController.text,
             observacoes: () => _observacoesController.text,
           ),
         ),
@@ -193,6 +208,14 @@ class _ClienteFormPageState extends State<ClienteFormPage> {
                   textInputAction: TextInputAction.next,
                   enabled: !ocupado,
                 ),
+                CampoTexto(
+                  rotulo: 'Apelido/Como chamar',
+                  hint: 'Ex: Aninha',
+                  controller: _apelidoController,
+                  textCapitalization: TextCapitalization.words,
+                  textInputAction: TextInputAction.next,
+                  enabled: !ocupado,
+                ),
               ],
             ),
             const SizedBox(height: AppSpacing.xxl),
@@ -206,6 +229,30 @@ class _ClienteFormPageState extends State<ClienteFormPage> {
                   controller: _telefoneController,
                   validator: Validadores.telefoneOpcional,
                   keyboardType: TextInputType.phone,
+                  textInputAction: TextInputAction.next,
+                  enabled: !ocupado,
+                ),
+                CampoTexto(
+                  rotulo: 'E-mail (Opcional)',
+                  hint: 'ana@email.com',
+                  controller: _emailController,
+                  validator: Validadores.emailOpcional,
+                  keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
+                  enabled: !ocupado,
+                ),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.xxl),
+            const RotuloSecao('Endereço (Opcional)'),
+            const SizedBox(height: AppSpacing.md),
+            CartaoFormulario(
+              campos: [
+                CampoTexto(
+                  rotulo: 'Bairro / Cidade',
+                  hint: 'Ex: Joinville, Santa Catarina',
+                  controller: _enderecoController,
+                  textCapitalization: TextCapitalization.words,
                   textInputAction: TextInputAction.next,
                   enabled: !ocupado,
                 ),

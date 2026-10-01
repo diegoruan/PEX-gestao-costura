@@ -100,6 +100,7 @@ class _ClientesPageState extends State<ClientesPage> {
         .where(
           (c) =>
               Texto.normalizar(c.nome).contains(termo) ||
+              Texto.normalizar(c.apelido ?? '').contains(termo) ||
               (c.telefone?.contains(termo) ?? false),
         )
         .toList();
@@ -126,7 +127,7 @@ class _ListaClientes extends StatelessWidget {
     final itens = <Widget>[];
     String? letraAtual;
     for (final cliente in clientes) {
-      final letra = Texto.normalizar(cliente.nome).characters.first
+      final letra = Texto.normalizar(cliente.nomeExibicao).characters.first
           .toUpperCase();
       if (letra != letraAtual) {
         itens.add(

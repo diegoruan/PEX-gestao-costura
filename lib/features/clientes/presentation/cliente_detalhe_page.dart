@@ -111,7 +111,7 @@ class _Detalhe extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
               child: Text(
-                cliente.nome,
+                cliente.nomeComApelido,
                 style: AppTextStyles.tituloDestaque,
                 textAlign: TextAlign.center,
               ),
@@ -139,6 +139,24 @@ class _Detalhe extends StatelessWidget {
                     rotulo: 'Telefone',
                     valor: cliente.telefone ?? 'Não informado',
                     destacar: cliente.telefone != null,
+                  ),
+                  LinhaInformacao(
+                    icone: const IconeSvg(
+                      AppAssets.iconeEmail,
+                      tamanho: AppSizes.iconeContato,
+                    ),
+                    rotulo: 'E-mail',
+                    valor: cliente.email ?? 'Não informado',
+                    destacar: cliente.email != null,
+                  ),
+                  LinhaInformacao(
+                    icone: const IconeSvg(
+                      AppAssets.iconeEndereco,
+                      tamanho: AppSizes.iconeContato,
+                    ),
+                    rotulo: 'Endereço',
+                    valor: cliente.endereco ?? 'Não informado',
+                    destacar: cliente.endereco != null,
                   ),
                 ],
               ),

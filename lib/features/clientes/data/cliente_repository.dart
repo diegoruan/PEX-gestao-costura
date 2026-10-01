@@ -53,14 +53,20 @@ class ClienteRepository {
 
   Future<void> cadastrar({
     required String nome,
+    String? apelido,
     String? telefone,
+    String? email,
+    String? endereco,
     String? observacoes,
   }) {
     final documento = _clientes.doc();
     final cliente = Cliente(
       id: documento.id,
       nome: nome.trim(),
+      apelido: _textoOuNulo(apelido),
       telefone: _textoOuNulo(telefone),
+      email: _textoOuNulo(email),
+      endereco: _textoOuNulo(endereco),
       observacoes: _textoOuNulo(observacoes),
       criadoEm: DateTime.now(),
     );
@@ -72,7 +78,10 @@ class ClienteRepository {
     return aguardarEscrita(
       _clientes.doc(cliente.id).update({
         'nome': cliente.nome.trim(),
+        'apelido': _textoOuNulo(cliente.apelido),
         'telefone': _textoOuNulo(cliente.telefone),
+        'email': _textoOuNulo(cliente.email),
+        'endereco': _textoOuNulo(cliente.endereco),
         'observacoes': _textoOuNulo(cliente.observacoes),
       }),
     );
@@ -87,7 +96,9 @@ class ClienteRepository {
       for (final doc in snap.docs) Cliente.fromMap(doc.id, doc.data()),
     ];
     return clientes..sort(
-      (a, b) => Texto.normalizar(a.nome).compareTo(Texto.normalizar(b.nome)),
+      (a, b) =>
+          Texto.normalizar(a.nomeExibicao)
+              .compareTo(Texto.normalizar(b.nomeExibicao)),
     );
   }
 
