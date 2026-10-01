@@ -7,11 +7,17 @@ import 'core/routes/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'features/auth/bloc/auth_bloc.dart';
 import 'features/auth/data/auth_repository.dart';
+import 'features/clientes/data/cliente_repository.dart';
 
 class App extends StatefulWidget {
-  const App({super.key, required this.authRepository});
+  const App({
+    super.key,
+    required this.authRepository,
+    required this.clienteRepository,
+  });
 
   final AuthRepository authRepository;
+  final ClienteRepository clienteRepository;
 
   @override
   State<App> createState() => _AppState();
@@ -37,6 +43,9 @@ class _AppState extends State<App> {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<AuthRepository>.value(value: widget.authRepository),
+        RepositoryProvider<ClienteRepository>.value(
+          value: widget.clienteRepository,
+        ),
       ],
       child: MultiBlocProvider(
         providers: [BlocProvider<AuthBloc>.value(value: _authBloc)],

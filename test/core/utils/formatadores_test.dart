@@ -13,5 +13,6 @@ void main() {
   test('formata datas no padrão dd/MM/yyyy', () {
     expect(Formatadores.data(DateTime(2026, 9, 1)), '01/09/2026');
     expect(Formatadores.mesAno(DateTime(2026, 9)), 'setembro/2026');
+    expect(Formatadores.mesAnoExtenso(DateTime(2025, 3)), 'março de 2025');
   });
 }

@@ -9,6 +9,7 @@ abstract final class AppColors {
 
   static const fundo = Color(0xFFF2EBE3);
   static const superficie = Color(0xFFFFFFFF);
+  static const superficieTranslucida = Color(0x99FFFFFF);
   static const bege = Color(0xFFEDE3D8);
   static const begeEscuro = Color(0xFFE8D5C4);
 
@@ -29,4 +30,7 @@ abstract final class AppColors {
   static const erro = Color(0xFFB3424A);
 
   static const sombra = textoPrincipal;
+
+  /// Fundos dos avatares de iniciais, na ordem usada no Figma.
+  static const avatares = [primaria, textoValor, alerta, sucesso];
 }
