@@ -1,3 +1,5 @@
+import 'moeda_input_formatter.dart';
+
 /// Validadores prontos para o `validator:` de um TextFormField.
 abstract final class Validadores {
   static const tamanhoMinimoSenha = 6;
@@ -47,6 +49,23 @@ abstract final class Validadores {
     if (digitos < 8 || digitos > 13) return 'Telefone inválido';
     return null;
   }
+
+  /// Para campos com [MoedaInputFormatter]: exige valor maior que zero.
+  static String? valorPositivo(String? valor) {
+    if (MoedaInputFormatter.centavos(valor ?? '') <= 0) {
+      return 'Informe um valor maior que zero';
+    }
+    return null;
+  }
+
+  static String? quantidade(int? valor) {
+    if (valor == null || valor < 1) return 'A quantidade mínima é 1';
+    return null;
+  }
+
+  /// Para campos de escolha (cliente, data...), em um `FormField<T>`.
+  static String? Function(T?) selecionado<T>(String mensagem) =>
+      (valor) => valor == null ? mensagem : null;
 
   static String? Function(String?) confirmacaoSenha(String Function() senha) {
     return (valor) {

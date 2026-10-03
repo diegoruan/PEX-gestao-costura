@@ -23,6 +23,8 @@ abstract final class AppRadius {
   static const item = 14.0;
   static const medio = 16.0;
   static const grande = 24.0;
+  static const folha = 28.0;
+  static const pilula = 20.0;
 }
 
 abstract final class AppSizes {
@@ -39,6 +41,23 @@ abstract final class AppSizes {
   static const avatarLista = 50.0;
   static const avatarDestaque = 80.0;
   static const bordaAvatar = 4.0;
+  static const avatarCompacto = 28.0;
+  static const iconeMeta = 11.0;
+  static const iconeAcao = 15.0;
+  static const iconeResumo = 20.0;
+  static const iconeTotal = 40.0;
+  static const miniaturaPedido = 60.0;
+  static const iconeMiniatura = 28.0;
+  static const fotoFormulario = 80.0;
+  static const iconeFotoFormulario = 22.0;
+  static const fotoDetalhe = 260.0;
+  static const iconeFotoDetalhe = 100.0;
+  static const botaoAcao = 48.0;
+  static const bordaTracejada = 2.0;
+  static const tracoBorda = 5.0;
+
+  /// Quanto o conteúdo do detalhe sobe por cima da foto.
+  static const sobreposicaoFoto = 20.0;
 }
 
 abstract final class AppShadows {
