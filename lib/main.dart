@@ -18,7 +18,7 @@ Future<void> main() async {
   Intl.defaultLocale = 'pt_BR';
   await initializeDateFormatting('pt_BR');
 
-  final imagemService = ImagemServiceFirebase();
+  final imagemService = ImagemServiceFirestore();
   runApp(
     App(
       authRepository: AuthRepository(),
