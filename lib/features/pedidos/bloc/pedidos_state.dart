@@ -13,7 +13,7 @@ enum AcaoPedido {
   excluindo,
   excluido,
 
-  /// Só a foto não foi enviada; nada foi gravado. A tela oferece tentar de
+  /// Só a foto não foi salva; nada foi gravado. A tela oferece tentar de
   /// novo ou salvar sem foto.
   fotoFalhou,
   falhou;

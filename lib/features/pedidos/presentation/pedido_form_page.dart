@@ -100,10 +100,16 @@ class _PedidoFormPageState extends State<PedidoFormPage> {
     _dataEntrega = pedido.dataEntrega;
   }
 
-  String? get _fotoSalva => _removerFoto ? null : _original?.fotoUrl;
+  /// O pedido em edição, se a foto que já estava salva deve continuar.
+  Pedido? get _pedidoComFoto {
+    final original = _original;
+    return original != null && original.temFoto && !_removerFoto
+        ? original
+        : null;
+  }
 
   Future<void> _escolherFoto() async {
-    final temFoto = _fotoNova != null || _fotoSalva != null;
+    final temFoto = _fotoNova != null || _pedidoComFoto != null;
     final escolha = await perguntarOrigemFoto(context, temFoto: temFoto);
     if (escolha == null || !mounted) return;
 
@@ -288,7 +294,7 @@ class _PedidoFormPageState extends State<PedidoFormPage> {
             Center(
               child: SeletorFoto(
                 fotoNova: _fotoNova,
-                fotoUrl: _fotoSalva,
+                pedidoComFoto: _pedidoComFoto,
                 carregando: _carregandoFoto,
                 onTap: ocupado ? null : _escolherFoto,
               ),

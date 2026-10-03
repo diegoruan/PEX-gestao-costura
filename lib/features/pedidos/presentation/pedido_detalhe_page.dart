@@ -205,7 +205,7 @@ class _Topo extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             FotoPedido(
-              url: pedido.fotoUrl,
+              pedido: pedido,
               tamanhoIcone: AppSizes.iconeFotoDetalhe,
               iconeGrande: true,
             ),

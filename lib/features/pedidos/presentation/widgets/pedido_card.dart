@@ -46,7 +46,7 @@ class PedidoCard extends StatelessWidget {
                     child: SizedBox.square(
                       dimension: AppSizes.miniaturaPedido,
                       child: FotoPedido(
-                        url: pedido.fotoUrl,
+                        pedido: pedido,
                         tamanhoIcone: AppSizes.iconeMiniatura,
                       ),
                     ),

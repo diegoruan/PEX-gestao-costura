@@ -9,6 +9,7 @@ import '../../../../core/theme/app_dimens.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../shared/widgets/icone_svg.dart';
 import '../../../../shared/widgets/indicador_carregando.dart';
+import '../../domain/pedido.dart';
 import 'foto_pedido.dart';
 
 /// Quadrado de 80px do formulário: tracejado com "Adicionar" ou a foto
@@ -17,19 +18,21 @@ class SeletorFoto extends StatelessWidget {
   const SeletorFoto({
     super.key,
     required this.fotoNova,
-    required this.fotoUrl,
+    required this.pedidoComFoto,
     required this.carregando,
     required this.onTap,
   });
 
   final Uint8List? fotoNova;
-  final String? fotoUrl;
+
+  /// Pedido cuja foto já salva deve aparecer (na edição), ou `null`.
+  final Pedido? pedidoComFoto;
   final bool carregando;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    final temFoto = fotoNova != null || fotoUrl != null;
+    final temFoto = fotoNova != null || pedidoComFoto != null;
     final Widget conteudo;
     if (carregando) {
       conteudo = const Center(
@@ -37,9 +40,9 @@ class SeletorFoto extends StatelessWidget {
       );
     } else if (fotoNova case final bytes?) {
       conteudo = Image.memory(bytes, fit: BoxFit.cover);
-    } else if (fotoUrl != null) {
+    } else if (pedidoComFoto case final pedido?) {
       conteudo = FotoPedido(
-        url: fotoUrl,
+        pedido: pedido,
         tamanhoIcone: AppSizes.iconeMiniatura,
       );
     } else {

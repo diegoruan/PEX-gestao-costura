@@ -22,7 +22,7 @@ Future<RespostaFalhaFoto?> perguntarFalhaFoto(
         borderRadius: BorderRadius.circular(AppRadius.medio),
       ),
       title: const Text(
-        'A foto não foi enviada',
+        'A foto não foi salva',
         style: AppTextStyles.tituloPagina,
       ),
       content: Text(mensagem, style: AppTextStyles.corpo),

@@ -16,7 +16,7 @@ class Pedido extends Equatable {
     required this.quantidade,
     required this.dataEntrega,
     this.observacoes,
-    this.fotoUrl,
+    this.fotoVersao,
     this.status = StatusPedido.pendente,
     this.dataFinalizacao,
     required this.criadoEm,
@@ -38,7 +38,11 @@ class Pedido extends Equatable {
   /// Só a data importa (meia-noite no horário local).
   final DateTime dataEntrega;
   final String? observacoes;
-  final String? fotoUrl;
+
+  /// Identifica a foto atual da peça (ela fica num documento separado, lido
+  /// pelo PedidoRepository). `null` quando o pedido não tem foto. Muda a cada
+  /// troca de foto, para nenhum cache mostrar a antiga.
+  final int? fotoVersao;
   final StatusPedido status;
 
   /// Preenchida quando o pedido é finalizado; é a data que o fechamento
@@ -47,6 +51,8 @@ class Pedido extends Equatable {
   final DateTime criadoEm;
 
   int get totalCentavos => valorUnitarioCentavos * quantidade;
+
+  bool get temFoto => fotoVersao != null;
 
   bool get finalizado => status == StatusPedido.finalizado;
 
@@ -88,7 +94,7 @@ class Pedido extends Equatable {
       quantidade: (map['quantidade'] as num?)?.toInt() ?? 1,
       dataEntrega: _data(map['dataEntrega']) ?? DateTime.now(),
       observacoes: map['observacoes'] as String?,
-      fotoUrl: map['fotoUrl'] as String?,
+      fotoVersao: (map['fotoVersao'] as num?)?.toInt(),
       status:
           StatusPedido.values.asNameMap()[map['status']] ??
           StatusPedido.pendente,
@@ -107,7 +113,7 @@ class Pedido extends Equatable {
       'quantidade': quantidade,
       'dataEntrega': Timestamp.fromDate(dataEntrega),
       'observacoes': observacoes,
-      'fotoUrl': fotoUrl,
+      'fotoVersao': fotoVersao,
       'status': status.name,
       'dataFinalizacao': dataFinalizacao == null
           ? null
@@ -117,7 +123,7 @@ class Pedido extends Equatable {
   }
 
   /// Nos campos opcionais, passe uma função para poder limpar o valor:
-  /// `pedido.copyWith(fotoUrl: () => null)`.
+  /// `pedido.copyWith(fotoVersao: () => null)`.
   Pedido copyWith({
     String? clienteId,
     String? clienteNome,
@@ -126,7 +132,7 @@ class Pedido extends Equatable {
     int? quantidade,
     DateTime? dataEntrega,
     String? Function()? observacoes,
-    String? Function()? fotoUrl,
+    int? Function()? fotoVersao,
     StatusPedido? status,
     DateTime? Function()? dataFinalizacao,
   }) {
@@ -140,7 +146,7 @@ class Pedido extends Equatable {
       quantidade: quantidade ?? this.quantidade,
       dataEntrega: dataEntrega ?? this.dataEntrega,
       observacoes: observacoes != null ? observacoes() : this.observacoes,
-      fotoUrl: fotoUrl != null ? fotoUrl() : this.fotoUrl,
+      fotoVersao: fotoVersao != null ? fotoVersao() : this.fotoVersao,
       status: status ?? this.status,
       dataFinalizacao: dataFinalizacao != null
           ? dataFinalizacao()
@@ -161,7 +167,7 @@ class Pedido extends Equatable {
     quantidade,
     dataEntrega,
     observacoes,
-    fotoUrl,
+    fotoVersao,
     status,
     dataFinalizacao,
     criadoEm,

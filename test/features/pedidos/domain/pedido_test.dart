@@ -14,7 +14,7 @@ void main() {
     quantidade: 2,
     dataEntrega: dataEntrega,
     observacoes: 'Tamanho P, com forro',
-    fotoUrl: 'https://exemplo.com/p1.jpg',
+    fotoVersao: 1756900000000,
     criadoEm: criadoEm,
   );
 
@@ -28,7 +28,7 @@ void main() {
         'quantidade': 2,
         'dataEntrega': Timestamp.fromDate(dataEntrega),
         'observacoes': 'Tamanho P, com forro',
-        'fotoUrl': 'https://exemplo.com/p1.jpg',
+        'fotoVersao': 1756900000000,
         'status': 'pendente',
         'dataFinalizacao': null,
         'criadoEm': Timestamp.fromDate(criadoEm),
@@ -77,7 +77,8 @@ void main() {
         'criadoEm': Timestamp.fromDate(criadoEm),
       });
       expect(lido.observacoes, isNull);
-      expect(lido.fotoUrl, isNull);
+      expect(lido.fotoVersao, isNull);
+      expect(lido.temFoto, isFalse);
       expect(lido.dataFinalizacao, isNull);
       expect(lido.status, StatusPedido.pendente);
       expect(lido.finalizado, isFalse);
@@ -178,17 +179,18 @@ void main() {
       expect(editado.nome, 'Vestido Longo');
       expect(editado.id, pedido.id);
       expect(editado.clienteNome, pedido.clienteNome);
-      expect(editado.fotoUrl, pedido.fotoUrl);
+      expect(editado.fotoVersao, pedido.fotoVersao);
       expect(editado.criadoEm, pedido.criadoEm);
     });
 
     test('consegue limpar campos opcionais', () {
       final editado = pedido.copyWith(
         observacoes: () => null,
-        fotoUrl: () => null,
+        fotoVersao: () => null,
       );
       expect(editado.observacoes, isNull);
-      expect(editado.fotoUrl, isNull);
+      expect(editado.fotoVersao, isNull);
+      expect(editado.temFoto, isFalse);
     });
   });
 
