@@ -31,3 +31,13 @@ class Falha implements Exception {
   @override
   String toString() => 'Falha: $mensagem';
 }
+
+/// O envio da foto falhou, mas o resto dos dados está intacto: a tela pode
+/// oferecer "tentar de novo" ou "salvar sem foto".
+class FalhaEnvioFoto extends Falha {
+  const FalhaEnvioFoto([
+    super.mensagem =
+        'Não foi possível enviar a foto. Verifique sua internet e tente de '
+        'novo, ou salve o pedido sem foto.',
+  ]);
+}
