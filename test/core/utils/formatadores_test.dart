@@ -15,4 +15,29 @@ void main() {
     expect(Formatadores.mesAno(DateTime(2026, 9)), 'setembro/2026');
     expect(Formatadores.mesAnoExtenso(DateTime(2025, 3)), 'março de 2025');
   });
+
+  test('formata valores em centavos', () {
+    expect(Formatadores.moedaCentavos(18050), 'R\$ 180,50');
+    expect(Formatadores.moedaCentavos(9999), 'R\$ 99,99');
+    expect(Formatadores.moedaCentavos(0), 'R\$ 0,00');
+  });
+
+  test('moeda compacta só esconde os centavos quando são zero', () {
+    expect(Formatadores.moedaCompacta(18000), 'R\$ 180');
+    expect(Formatadores.moedaCompacta(18050), 'R\$ 180,50');
+    expect(Formatadores.moedaCompacta(123400), 'R\$ 1.234');
+  });
+
+  test('formata datas curtas e por extenso dos pedidos', () {
+    final data = DateTime(2026, 9, 3);
+    expect(Formatadores.diaMes(data), '3 set');
+    expect(Formatadores.diaMesAno(data), '3 set 2026');
+    expect(Formatadores.diaMesExtenso(data), '3 de setembro');
+    expect(Formatadores.dataExtenso(data), '3 de setembro, 2026');
+  });
+
+  test('pluraliza peças', () {
+    expect(Formatadores.pecas(1), '1 peça');
+    expect(Formatadores.pecas(2), '2 peças');
+  });
 }
