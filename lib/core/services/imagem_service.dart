@@ -1,43 +1,61 @@
 import 'dart:async';
 
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../errors/falha.dart';
+import 'firestore_escrita.dart';
 
 enum OrigemImagem { camera, galeria }
 
-/// Tudo sobre fotos fica atrás desta interface: quem usa não sabe se a imagem
-/// vai para o Firebase Storage ou para outro lugar.
+/// Tudo sobre fotos fica atrás desta interface: quem usa não sabe onde a
+/// imagem é guardada (hoje no Firestore; amanhã pode ser outro lugar).
 abstract interface class ImagemService {
   /// Abre a câmera ou a galeria e devolve a foto já comprimida (JPEG), ou
   /// `null` se o usuário desistir.
   Future<Uint8List?> escolher(OrigemImagem origem);
 
-  /// Envia a foto para [caminho], substituindo o que houver lá, e devolve a
-  /// URL pública. Lança [FalhaEnvioFoto] se não conseguir.
-  Future<String> enviar({required String caminho, required Uint8List bytes});
+  /// Guarda a foto em [caminho], substituindo o que houver lá. [versao]
+  /// identifica esta foto; quem for exibir passa a mesma versão para
+  /// [carregar]. Lança [FalhaEnvioFoto] se não conseguir.
+  Future<void> salvar({
+    required String caminho,
+    required int versao,
+    required Uint8List bytes,
+  });
+
+  /// Devolve a foto em [caminho], ou `null` se ela não existir.
+  Future<Uint8List?> carregar(String caminho, {required int versao});
 
   /// Apaga a foto em [caminho]. Não falha se ela não existir.
   Future<void> apagar(String caminho);
 }
 
-class ImagemServiceFirebase implements ImagemService {
-  ImagemServiceFirebase({FirebaseStorage? storage, ImagePicker? picker})
-    : _storage = storage ?? FirebaseStorage.instance,
+/// Guarda cada foto como um documento do Firestore com o JPEG em um campo
+/// `Blob`. Escolhido no lugar do Firebase Storage porque o Storage exige o
+/// plano pago (Blaze); o Firestore entra na cota gratuita e ainda funciona
+/// offline como o resto dos dados.
+class ImagemServiceFirestore implements ImagemService {
+  ImagemServiceFirestore({FirebaseFirestore? firestore, ImagePicker? picker})
+    : _firestore = firestore ?? FirebaseFirestore.instance,
       _picker = picker ?? ImagePicker();
 
-  final FirebaseStorage _storage;
+  final FirebaseFirestore _firestore;
   final ImagePicker _picker;
 
-  static const ladoMaximo = 1024.0;
-  static const qualidadeJpeg = 70;
+  static const ladoMaximo = 800.0;
 
-  /// Sem internet o Storage fica tentando por vários minutos; preferimos
-  /// desistir antes e deixar a pessoa salvar o pedido sem foto.
-  static const limiteEnvio = Duration(seconds: 30);
+  /// Tentativas de qualidade JPEG, da melhor para a pior, até a foto caber.
+  static const qualidades = [60, 45, 30];
+
+  /// Um documento do Firestore tem no máximo 1 MiB; deixamos folga.
+  static const tamanhoMaximoBytes = 800 * 1024;
+
+  /// Fotos já lidas nesta sessão, por caminho + versão. Evita gastar uma
+  /// leitura do Firestore toda vez que a lista é rolada.
+  final _cache = <String, Uint8List>{};
 
   @override
   Future<Uint8List?> escolher(OrigemImagem origem) async {
@@ -64,42 +82,65 @@ class ImagemServiceFirebase implements ImagemService {
     }
     if (arquivo == null) return null;
 
-    // Converte para JPEG (inclusive HEIC do iPhone) com qualidade reduzida.
-    final comprimida = await FlutterImageCompress.compressWithFile(
-      arquivo.path,
-      quality: qualidadeJpeg,
-      format: CompressFormat.jpeg,
-    );
-    return comprimida ?? await arquivo.readAsBytes();
+    // Converte para JPEG (inclusive HEIC do iPhone), baixando a qualidade
+    // até caber no limite do documento.
+    for (final qualidade in qualidades) {
+      final comprimida = await FlutterImageCompress.compressWithFile(
+        arquivo.path,
+        quality: qualidade,
+        format: CompressFormat.jpeg,
+      );
+      if (comprimida != null && comprimida.length <= tamanhoMaximoBytes) {
+        return comprimida;
+      }
+    }
+    throw const Falha('A foto ficou grande demais. Tente outra foto.');
   }
 
   @override
-  Future<String> enviar({
+  Future<void> salvar({
     required String caminho,
+    required int versao,
     required Uint8List bytes,
   }) async {
-    final referencia = _storage.ref(caminho);
-    final tarefa = referencia.putData(
-      bytes,
-      SettableMetadata(contentType: 'image/jpeg'),
-    );
+    if (bytes.length > tamanhoMaximoBytes) throw const FalhaEnvioFoto();
     try {
-      await tarefa.timeout(limiteEnvio);
-      return await referencia.getDownloadURL();
-    } on TimeoutException {
-      await tarefa.cancel();
-      throw const FalhaEnvioFoto();
-    } on FirebaseException {
+      await aguardarEscrita(
+        _firestore.doc(caminho).set({'versao': versao, 'bytes': Blob(bytes)}),
+      );
+    } on Falha {
       throw const FalhaEnvioFoto();
     }
+    _limparCache(caminho);
+    _cache[_chave(caminho, versao)] = bytes;
+  }
+
+  @override
+  Future<Uint8List?> carregar(String caminho, {required int versao}) async {
+    final chave = _chave(caminho, versao);
+    final emCache = _cache[chave];
+    if (emCache != null) return emCache;
+
+    // Online lê do servidor; offline o Firestore devolve a cópia local.
+    final documento = await _firestore.doc(caminho).get();
+    final blob = documento.data()?['bytes'] as Blob?;
+    if (blob == null) return null;
+    final bytes = blob.bytes;
+    // Só guarda em cache se for a versão pedida; uma versão antiga (foto
+    // trocada em outro aparelho e ainda não sincronizada) é exibida, mas
+    // será lida de novo na próxima vez.
+    if (documento.data()?['versao'] == versao) _cache[chave] = bytes;
+    return bytes;
   }
 
   @override
   Future<void> apagar(String caminho) async {
-    try {
-      await _storage.ref(caminho).delete();
-    } on FirebaseException catch (e) {
-      if (e.code != 'object-not-found') rethrow;
-    }
+    _limparCache(caminho);
+    await aguardarEscrita(_firestore.doc(caminho).delete());
   }
+
+  String _chave(String caminho, int versao) => '$caminho#$versao';
+
+  void _limparCache(String caminho) =>
+      _cache.removeWhere((chave, _) => chave.startsWith('$caminho#'));
 }
