@@ -1,0 +1,24 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Cada usuário só enxerga e altera as próprias fotos.
+    match /usuarios/{uid}/{caminho=**} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+
+      // Só imagens de até 2 MB (o app envia JPEG comprimido, bem menor).
+      allow create, update: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.size < 2 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+
+      // Separado do write: na exclusão não existe request.resource.
+      allow delete: if request.auth != null && request.auth.uid == uid;
+    }
+
+    // Todo o resto fica fechado.
+    match /{caminho=**} {
+      allow read, write: if false;
+    }
+  }
+}
