@@ -15,6 +15,11 @@ import '../../features/clientes/presentation/cliente_detalhe_page.dart';
 import '../../features/clientes/presentation/cliente_form_page.dart';
 import '../../features/clientes/presentation/clientes_page.dart';
 import '../../features/home/presentation/home_page.dart';
+import '../../features/pedidos/bloc/pedidos_bloc.dart';
+import '../../features/pedidos/data/pedido_repository.dart';
+import '../../features/pedidos/presentation/pedido_detalhe_page.dart';
+import '../../features/pedidos/presentation/pedido_form_page.dart';
+import '../../features/pedidos/presentation/pedidos_page.dart';
 import 'app_routes.dart';
 
 GoRouter criarRouter(AuthBloc authBloc) {
@@ -50,6 +55,7 @@ GoRouter criarRouter(AuthBloc authBloc) {
         builder: (context, state) => const HomePage(),
       ),
       _rotasClientes(),
+      _rotasPedidos(),
     ],
   );
 }
@@ -89,6 +95,62 @@ ShellRoute _rotasClientes() {
                 path: AppRoutes.clienteEditarPath,
                 builder: (context, state) => ClienteFormPage(
                   clienteId: state.pathParameters[AppRoutes.paramId],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ],
+  );
+}
+
+/// Mesma ideia das rotas de clientes: um PedidosBloc para lista, detalhe e
+/// formulário. O formulário também precisa da lista de clientes ativos, então
+/// esta área ganha o seu próprio ClientesBloc (criado só quando o formulário
+/// o lê, por ser lazy) em vez de um global: assim ele nasce depois do login e
+/// é fechado ao sair, sem escutar o Firestore de uma sessão antiga.
+ShellRoute _rotasPedidos() {
+  return ShellRoute(
+    builder: (context, state, child) => MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              PedidosBloc(pedidoRepository: context.read<PedidoRepository>())
+                ..add(const PedidosIniciado()),
+        ),
+        BlocProvider(
+          create: (context) =>
+              ClientesBloc(clienteRepository: context.read<ClienteRepository>())
+                ..add(const ClientesIniciado()),
+        ),
+      ],
+      child: child,
+    ),
+    routes: [
+      GoRoute(
+        name: AppRoutes.pedidos,
+        path: AppRoutes.pedidosPath,
+        builder: (context, state) => const PedidosPage(),
+        routes: [
+          // "novo" precisa vir antes de ":id", senão seria lido como um id.
+          GoRoute(
+            name: AppRoutes.pedidoNovo,
+            path: AppRoutes.pedidoNovoPath,
+            builder: (context, state) => const PedidoFormPage(),
+          ),
+          GoRoute(
+            name: AppRoutes.pedidoDetalhe,
+            path: AppRoutes.pedidoDetalhePath,
+            builder: (context, state) => PedidoDetalhePage(
+              pedidoId: state.pathParameters[AppRoutes.paramId]!,
+            ),
+            routes: [
+              GoRoute(
+                name: AppRoutes.pedidoEditar,
+                path: AppRoutes.pedidoEditarPath,
+                builder: (context, state) => PedidoFormPage(
+                  pedidoId: state.pathParameters[AppRoutes.paramId],
                 ),
               ),
             ],

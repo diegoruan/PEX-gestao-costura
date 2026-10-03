@@ -12,6 +12,11 @@ abstract final class AppRoutes {
   static const clienteDetalhe = 'cliente-detalhe';
   static const clienteEditar = 'cliente-editar';
 
+  static const pedidos = 'pedidos';
+  static const pedidoNovo = 'pedido-novo';
+  static const pedidoDetalhe = 'pedido-detalhe';
+  static const pedidoEditar = 'pedido-editar';
+
   static const splashPath = '/splash';
   static const loginPath = '/login';
   static const cadastroPath = '/cadastro';
@@ -24,6 +29,12 @@ abstract final class AppRoutes {
   static const clienteNovoPath = 'novo';
   static const clienteDetalhePath = ':$paramId';
   static const clienteEditarPath = 'editar';
+
+  /// /pedidos, /pedidos/novo, /pedidos/:id e /pedidos/:id/editar.
+  static const pedidosPath = '/pedidos';
+  static const pedidoNovoPath = 'novo';
+  static const pedidoDetalhePath = ':$paramId';
+  static const pedidoEditarPath = 'editar';
 
   /// Uso: `context.pushNamed(AppRoutes.clienteDetalhe,
   /// pathParameters: {AppRoutes.paramId: cliente.id})`.
