@@ -10,16 +10,11 @@ abstract final class Formatadores {
   );
   static final _data = DateFormat('dd/MM/yyyy', 'pt_BR');
   static final _diaMesNumerico = DateFormat('dd/MM', 'pt_BR');
-  static final _dataHora = DateFormat('dd/MM/yyyy HH:mm', 'pt_BR');
-  static final _mesAno = DateFormat('MMMM/yyyy', 'pt_BR');
   static final _mesAnoTitulo = DateFormat('MMMM yyyy', 'pt_BR');
   static final _mesAnoExtenso = DateFormat("MMMM 'de' yyyy", 'pt_BR');
   static final _mesAbreviado = DateFormat('MMM', 'pt_BR');
   static final _diaMesExtenso = DateFormat("d 'de' MMMM", 'pt_BR');
   static final _dataExtenso = DateFormat("d 'de' MMMM, yyyy", 'pt_BR');
-
-  /// 1240.5 -> "R$ 1.240,50"
-  static String moeda(num valor) => _moeda.format(valor);
 
   /// 18050 -> "R$ 180,50". Os valores do app são guardados em centavos.
   static String moedaCentavos(int centavos) => _moeda.format(centavos / 100);
@@ -31,11 +26,6 @@ abstract final class Formatadores {
 
   /// DateTime(2026, 9, 1) -> "01/09/2026"
   static String data(DateTime data) => _data.format(data);
-
-  static String dataHora(DateTime data) => _dataHora.format(data);
-
-  /// Útil no fechamento mensal: DateTime(2026, 9) -> "setembro/2026"
-  static String mesAno(DateTime data) => _mesAno.format(data);
 
   /// Cabeçalho dos meses no histórico: DateTime(2026, 9) -> "Setembro 2026"
   static String mesAnoTitulo(DateTime data) {
