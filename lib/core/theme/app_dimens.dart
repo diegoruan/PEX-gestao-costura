@@ -59,6 +59,11 @@ abstract final class AppSizes {
   static const bordaTracejada = 2.0;
   static const tracoBorda = 5.0;
 
+  static const iconeNavegacao = 22.0;
+
+  /// Pontinho embaixo do item ativo da barra de navegação.
+  static const pontoNavegacao = 4.0;
+
   /// Quanto o conteúdo do detalhe sobe por cima da foto.
   static const sobreposicaoFoto = 20.0;
 }

@@ -19,8 +19,13 @@ import '../../features/pedidos/presentation/pedido_form_page.dart';
 import '../../features/pedidos/presentation/pedidos_page.dart';
 import 'app_routes.dart';
 import 'escopo_sessao.dart';
+import 'navegacao_shell.dart';
 
 GoRouter criarRouter(AuthBloc authBloc) {
+  // Criadas aqui (e não globais) para cada router ter as suas: os testes
+  // montam vários.
+  final sessaoKey = GlobalKey<NavigatorState>(debugLabel: 'sessao');
+
   return GoRouter(
     initialLocation: AppRoutes.splashPath,
     refreshListenable: _BlocRefreshListenable(authBloc.stream),
@@ -48,25 +53,47 @@ GoRouter criarRouter(AuthBloc authBloc) {
             RecuperarSenhaPage(emailInicial: state.extra as String?),
       ),
       // Tudo o que exige login fica dentro deste shell; ver EscopoSessao.
+      // Ele tem navigator próprio ([sessaoKey]): detalhes e formulários abrem
+      // nele, por cima da barra, e continuam enxergando os blocs da sessão.
+      // No navigator raiz eles ficariam acima dos providers.
       ShellRoute(
+        navigatorKey: sessaoKey,
         builder: (context, state, child) => EscopoSessao(child: child),
         routes: [
-          GoRoute(
-            name: AppRoutes.home,
-            path: AppRoutes.homePath,
-            builder: (context, state) => const HomePage(),
-          ),
-          _rotasClientes(),
-          _rotasPedidos(),
-          GoRoute(
-            name: AppRoutes.historico,
-            path: AppRoutes.historicoPath,
-            builder: (context, state) => const HistoricoPage(),
-          ),
-          GoRoute(
-            name: AppRoutes.fechamento,
-            path: AppRoutes.fechamentoPath,
-            builder: (context, state) => const FechamentoPage(),
+          StatefulShellRoute.indexedStack(
+            builder: (context, state, shell) => NavegacaoShell(shell: shell),
+            // Mesma ordem de AbasNavegacao.
+            branches: [
+              StatefulShellBranch(
+                routes: [
+                  GoRoute(
+                    name: AppRoutes.home,
+                    path: AppRoutes.homePath,
+                    builder: (context, state) => const HomePage(),
+                  ),
+                ],
+              ),
+              StatefulShellBranch(routes: [_rotasPedidos(sessaoKey)]),
+              StatefulShellBranch(routes: [_rotasClientes(sessaoKey)]),
+              StatefulShellBranch(
+                routes: [
+                  GoRoute(
+                    name: AppRoutes.historico,
+                    path: AppRoutes.historicoPath,
+                    builder: (context, state) => const HistoricoPage(),
+                  ),
+                ],
+              ),
+              StatefulShellBranch(
+                routes: [
+                  GoRoute(
+                    name: AppRoutes.fechamento,
+                    path: AppRoutes.fechamentoPath,
+                    builder: (context, state) => const FechamentoPage(),
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       ),
@@ -74,8 +101,9 @@ GoRouter criarRouter(AuthBloc authBloc) {
   );
 }
 
-/// /clientes, /clientes/novo, /clientes/:id e /clientes/:id/editar.
-GoRoute _rotasClientes() {
+/// /clientes, /clientes/novo, /clientes/:id e /clientes/:id/editar. Só a
+/// lista fica na aba; o resto abre por cima da barra, como no Figma.
+GoRoute _rotasClientes(GlobalKey<NavigatorState> sessaoKey) {
   return GoRoute(
     name: AppRoutes.clientes,
     path: AppRoutes.clientesPath,
@@ -83,11 +111,13 @@ GoRoute _rotasClientes() {
     routes: [
       // "novo" precisa vir antes de ":id", senão seria lido como um id.
       GoRoute(
+        parentNavigatorKey: sessaoKey,
         name: AppRoutes.clienteNovo,
         path: AppRoutes.clienteNovoPath,
         builder: (context, state) => const ClienteFormPage(),
       ),
       GoRoute(
+        parentNavigatorKey: sessaoKey,
         name: AppRoutes.clienteDetalhe,
         path: AppRoutes.clienteDetalhePath,
         builder: (context, state) => ClienteDetalhePage(
@@ -95,6 +125,7 @@ GoRoute _rotasClientes() {
         ),
         routes: [
           GoRoute(
+            parentNavigatorKey: sessaoKey,
             name: AppRoutes.clienteEditar,
             path: AppRoutes.clienteEditarPath,
             builder: (context, state) => ClienteFormPage(
@@ -107,8 +138,9 @@ GoRoute _rotasClientes() {
   );
 }
 
-/// /pedidos, /pedidos/novo, /pedidos/:id e /pedidos/:id/editar.
-GoRoute _rotasPedidos() {
+/// /pedidos, /pedidos/novo, /pedidos/:id e /pedidos/:id/editar. Só a lista
+/// fica na aba; o resto abre por cima da barra, como no Figma.
+GoRoute _rotasPedidos(GlobalKey<NavigatorState> sessaoKey) {
   return GoRoute(
     name: AppRoutes.pedidos,
     path: AppRoutes.pedidosPath,
@@ -116,11 +148,13 @@ GoRoute _rotasPedidos() {
     routes: [
       // "novo" precisa vir antes de ":id", senão seria lido como um id.
       GoRoute(
+        parentNavigatorKey: sessaoKey,
         name: AppRoutes.pedidoNovo,
         path: AppRoutes.pedidoNovoPath,
         builder: (context, state) => const PedidoFormPage(),
       ),
       GoRoute(
+        parentNavigatorKey: sessaoKey,
         name: AppRoutes.pedidoDetalhe,
         path: AppRoutes.pedidoDetalhePath,
         builder: (context, state) => PedidoDetalhePage(
@@ -128,6 +162,7 @@ GoRoute _rotasPedidos() {
         ),
         routes: [
           GoRoute(
+            parentNavigatorKey: sessaoKey,
             name: AppRoutes.pedidoEditar,
             path: AppRoutes.pedidoEditarPath,
             builder: (context, state) => PedidoFormPage(
@@ -151,7 +186,7 @@ String? _redirecionar(AuthState auth, GoRouterState state) {
     // Não redireciona durante uma requisição para a tela não trocar no meio.
     AuthCarregando() => null,
     AuthAutenticado() =>
-      (naSplash || emRotaPublica) ? AppRoutes.homePath : null,
+      (naSplash || emRotaPublica || local == '/') ? AppRoutes.homePath : null,
     AuthNaoAutenticado() ||
     AuthErro() ||
     AuthRecuperacaoEnviada() => emRotaPublica ? null : AppRoutes.loginPath,

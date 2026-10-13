@@ -387,6 +387,21 @@ abstract final class AppTextStyles {
     color: AppColors.textoValor,
   );
 
+  /// Rótulos da barra de navegação inferior.
+  static const rotuloNavegacao = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 10,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textoSecundario,
+  );
+
+  static const rotuloNavegacaoAtivo = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 10,
+    fontWeight: FontWeight.w700,
+    color: AppColors.primaria,
+  );
+
   static const snackbar = TextStyle(
     fontFamily: fontFamily,
     fontSize: 14,
