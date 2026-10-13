@@ -39,10 +39,10 @@ class PedidoDetalhePage extends StatelessWidget {
         switch (state.acao) {
           case AcaoPedido.finalizado:
             mostrarSnackbarSucesso(context, 'Pedido marcado como entregue.');
-            context.goNamed(AppRoutes.pedidos);
+            _voltar(context);
           case AcaoPedido.excluido:
             mostrarSnackbarSucesso(context, 'Pedido excluído.');
-            context.goNamed(AppRoutes.pedidos);
+            _voltar(context);
           case AcaoPedido.falhou:
             mostrarSnackbarErro(context, state.mensagemErro!);
           default:
@@ -239,9 +239,7 @@ class _Topo extends StatelessWidget {
                           size: AppSizes.iconeBotao,
                           color: corIcone,
                         ),
-                        onPressed: () => context.canPop()
-                            ? context.pop()
-                            : context.goNamed(AppRoutes.pedidos),
+                        onPressed: () => _voltar(context),
                       ),
                       const Spacer(),
                       _BotaoSobreFoto(
@@ -570,3 +568,8 @@ class _BotaoAcao extends StatelessWidget {
     );
   }
 }
+
+/// O detalhe abre da lista, da Home ou do detalhe do cliente: volta para
+/// quem abriu. Sem tela anterior (link direto), cai na lista de pedidos.
+void _voltar(BuildContext context) =>
+    context.canPop() ? context.pop() : context.goNamed(AppRoutes.pedidos);
