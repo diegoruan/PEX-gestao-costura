@@ -175,7 +175,7 @@ class _ClienteFormPageState extends State<ClienteFormPage> {
       return state is ClientesCarregando
           ? const Center(child: IndicadorCarregando())
           : EstadoMensagem(
-              icone: Icons.person_off_outlined,
+              icone: AppIcons.clienteNaoEncontrado,
               titulo: 'Cliente não encontrado',
               mensagem: 'Ele pode ter sido excluído.',
               textoAcao: 'Voltar para a lista',

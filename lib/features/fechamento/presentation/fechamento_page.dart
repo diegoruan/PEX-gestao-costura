@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/theme/app_dimens.dart';
+import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../core/utils/formatadores.dart';
 import '../../../shared/widgets/botao_icone.dart';
@@ -82,7 +83,7 @@ class _Conteudo extends StatelessWidget {
           ],
           FechamentoErro(:final mensagem) => [
             EstadoMensagem(
-              icone: Icons.cloud_off_outlined,
+              icone: AppIcons.semConexao,
               titulo: 'Não foi possível carregar',
               mensagem: mensagem,
               textoAcao: 'Tentar novamente',
@@ -93,7 +94,7 @@ class _Conteudo extends StatelessWidget {
               when fechamento.clientes.isEmpty =>
             [
               EstadoMensagem(
-                icone: Icons.event_busy_outlined,
+                icone: AppIcons.mesSemPecas,
                 titulo: 'Nenhuma peça finalizada',
                 mensagem:
                     'Não há pedidos entregues em '

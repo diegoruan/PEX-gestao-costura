@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/routes/app_routes.dart';
 import '../../../core/theme/app_dimens.dart';
+import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../shared/widgets/estado_mensagem.dart';
 import '../../../shared/widgets/indicador_carregando.dart';
@@ -113,7 +114,7 @@ class _Recentes extends StatelessWidget {
         child: Center(child: IndicadorCarregando()),
       ),
       HomeErro(:final mensagem) => EstadoMensagem(
-        icone: Icons.cloud_off_outlined,
+        icone: AppIcons.semConexao,
         titulo: 'Não foi possível carregar',
         mensagem: mensagem,
         textoAcao: 'Tentar novamente',
@@ -121,7 +122,7 @@ class _Recentes extends StatelessWidget {
       ),
       HomeSucesso(:final resumo) when resumo.recentes.isEmpty =>
         const EstadoMensagem(
-          icone: Icons.checkroom_outlined,
+          icone: AppIcons.camiseta,
           titulo: 'Nenhum pedido ainda',
           mensagem: 'Use o "Novo Pedido" para cadastrar a primeira peça.',
         ),

@@ -90,7 +90,7 @@ class FiltrosHistorico extends StatelessWidget {
               ),
             ),
             trailing: selecionado
-                ? const Icon(Icons.check, color: AppColors.primaria)
+                ? const Icon(AppIcons.check, color: AppColors.primaria)
                 : null,
             onTap: () => Navigator.of(context).pop((id: id)),
           );

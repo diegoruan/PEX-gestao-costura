@@ -277,7 +277,7 @@ class _PedidoFormPageState extends State<PedidoFormPage> {
     return state is PedidosCarregando
         ? const Center(child: IndicadorCarregando())
         : EstadoMensagem(
-            icone: Icons.search_off,
+            icone: AppIcons.semResultado,
             titulo: 'Pedido não encontrado',
             mensagem: 'Ele pode ter sido entregue ou excluído.',
             textoAcao: 'Voltar para a lista',

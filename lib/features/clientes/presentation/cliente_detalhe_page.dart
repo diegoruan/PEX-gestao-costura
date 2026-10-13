@@ -56,13 +56,13 @@ class ClienteDetalhePage extends StatelessWidget {
         final Widget conteudo = switch (state) {
           ClientesCarregando() => const Center(child: IndicadorCarregando()),
           ClientesErro(:final mensagem) => EstadoMensagem(
-            icone: Icons.cloud_off_outlined,
+            icone: AppIcons.semConexao,
             titulo: 'Não foi possível carregar',
             mensagem: mensagem,
           ),
           ClientesSucesso() => switch (state.buscarPorId(clienteId)) {
             null => EstadoMensagem(
-              icone: Icons.person_off_outlined,
+              icone: AppIcons.clienteNaoEncontrado,
               titulo: 'Cliente não encontrado',
               mensagem: 'Ele pode ter sido excluído.',
               textoAcao: 'Voltar para a lista',

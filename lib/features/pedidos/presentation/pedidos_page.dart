@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimens.dart';
+import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../core/utils/formatadores.dart';
 import '../../../shared/widgets/botao_icone.dart';
@@ -36,7 +37,7 @@ class PedidosPage extends StatelessWidget {
                   descricao: 'Novo pedido',
                   estilo: EstiloBotaoIcone.primario,
                   icone: const Icon(
-                    Icons.add,
+                    AppIcons.adicionar,
                     size: AppSizes.iconeBotao,
                     color: AppColors.textoSobrePrimaria,
                   ),
@@ -51,7 +52,7 @@ class PedidosPage extends StatelessWidget {
                     child: IndicadorCarregando(),
                   ),
                   PedidosErro(:final mensagem) => EstadoMensagem(
-                    icone: Icons.cloud_off_outlined,
+                    icone: AppIcons.semConexao,
                     titulo: 'Não foi possível carregar',
                     mensagem: mensagem,
                     textoAcao: 'Tentar novamente',
@@ -61,7 +62,7 @@ class PedidosPage extends StatelessWidget {
                   ),
                   PedidosSucesso(:final pedidos) when pedidos.isEmpty =>
                     EstadoMensagem(
-                      icone: Icons.checkroom_outlined,
+                      icone: AppIcons.camiseta,
                       titulo: 'Nenhum pedido em aberto',
                       mensagem: 'Cadastre as peças que você precisa entregar.',
                       textoAcao: 'Cadastrar pedido',

@@ -53,7 +53,7 @@ class PedidoDetalhePage extends StatelessWidget {
         final Widget conteudo = switch (state) {
           PedidosCarregando() => const Center(child: IndicadorCarregando()),
           PedidosErro(:final mensagem) => EstadoMensagem(
-            icone: Icons.cloud_off_outlined,
+            icone: AppIcons.semConexao,
             titulo: 'Não foi possível carregar',
             mensagem: mensagem,
           ),
@@ -68,7 +68,7 @@ class PedidoDetalhePage extends StatelessWidget {
                     state.acao == AcaoPedido.excluido =>
               const Center(child: IndicadorCarregando()),
             null => EstadoMensagem(
-              icone: Icons.search_off,
+              icone: AppIcons.semResultado,
               titulo: 'Pedido não encontrado',
               mensagem: 'Ele pode ter sido entregue ou excluído.',
               textoAcao: 'Voltar para a lista',

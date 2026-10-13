@@ -37,4 +37,15 @@ abstract final class AppIcons {
   static const documento = Icons.insert_drive_file_outlined;
   static const documentoTexto = Icons.description_outlined;
   static const grafico = Icons.bar_chart_rounded;
+  static const historico = Icons.history_rounded;
+
+  static const galeria = Icons.photo_library_outlined;
+  static const mostrarSenha = Icons.visibility_outlined;
+  static const ocultarSenha = Icons.visibility_off_outlined;
+
+  /// Estados vazios e de erro (EstadoMensagem).
+  static const semConexao = Icons.cloud_off_outlined;
+  static const semResultado = Icons.search_off_rounded;
+  static const clienteNaoEncontrado = Icons.person_off_outlined;
+  static const mesSemPecas = Icons.event_busy_outlined;
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/theme/app_dimens.dart';
+import '../../../core/theme/app_icons.dart';
 import '../../../shared/widgets/cabecalho_pagina.dart';
 import '../../../shared/widgets/campo_busca.dart';
 import '../../../shared/widgets/estado_mensagem.dart';
@@ -31,7 +32,7 @@ class HistoricoPage extends StatelessWidget {
                     child: IndicadorCarregando(),
                   ),
                   HistoricoErro(:final mensagem) => EstadoMensagem(
-                    icone: Icons.cloud_off_outlined,
+                    icone: AppIcons.semConexao,
                     titulo: 'Não foi possível carregar',
                     mensagem: mensagem,
                     textoAcao: 'Tentar novamente',
@@ -41,7 +42,7 @@ class HistoricoPage extends StatelessWidget {
                   ),
                   HistoricoSucesso(:final pedidos) when pedidos.isEmpty =>
                     const EstadoMensagem(
-                      icone: Icons.history,
+                      icone: AppIcons.historico,
                       titulo: 'Nenhuma peça entregue ainda',
                       mensagem:
                           'Os pedidos marcados como entregues aparecem aqui.',
@@ -81,7 +82,7 @@ class _Conteudo extends StatelessWidget {
         Expanded(
           child: filtrados.isEmpty
               ? const EstadoMensagem(
-                  icone: Icons.search_off,
+                  icone: AppIcons.semResultado,
                   titulo: 'Nenhuma peça encontrada',
                   mensagem: 'Confira a busca ou os filtros escolhidos.',
                 )

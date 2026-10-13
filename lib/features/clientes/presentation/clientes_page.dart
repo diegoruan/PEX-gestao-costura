@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimens.dart';
+import '../../../core/theme/app_icons.dart';
 import '../../../core/utils/texto.dart';
 import '../../../shared/widgets/botao_icone.dart';
 import '../../../shared/widgets/cabecalho_pagina.dart';
@@ -43,7 +44,7 @@ class _ClientesPageState extends State<ClientesPage> {
                   descricao: 'Novo cliente',
                   estilo: EstiloBotaoIcone.primario,
                   icone: const Icon(
-                    Icons.add,
+                    AppIcons.adicionar,
                     size: AppSizes.iconeBotao,
                     color: AppColors.textoSobrePrimaria,
                   ),
@@ -65,7 +66,7 @@ class _ClientesPageState extends State<ClientesPage> {
                     child: IndicadorCarregando(),
                   ),
                   ClientesErro(:final mensagem) => EstadoMensagem(
-                    icone: Icons.cloud_off_outlined,
+                    icone: AppIcons.semConexao,
                     titulo: 'Não foi possível carregar',
                     mensagem: mensagem,
                     textoAcao: 'Tentar novamente',
@@ -75,7 +76,7 @@ class _ClientesPageState extends State<ClientesPage> {
                   ),
                   ClientesSucesso(:final clientes) when clientes.isEmpty =>
                     EstadoMensagem(
-                      icone: Icons.people_outline,
+                      icone: AppIcons.pessoas,
                       titulo: 'Nenhum cliente ainda',
                       mensagem: 'Cadastre seus clientes fixos para começar.',
                       textoAcao: 'Cadastrar cliente',
@@ -116,7 +117,7 @@ class _ListaClientes extends StatelessWidget {
   Widget build(BuildContext context) {
     if (clientes.isEmpty) {
       return const EstadoMensagem(
-        icone: Icons.search_off,
+        icone: AppIcons.semResultado,
         titulo: 'Nenhum cliente encontrado',
         mensagem: 'Confira o nome ou telefone digitado.',
       );

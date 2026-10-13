@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
+import '../../../../core/theme/app_icons.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../shared/widgets/avatar_iniciais.dart';
 import '../../../clientes/domain/cliente.dart';
@@ -88,7 +89,7 @@ Future<Cliente?> escolherCliente(
                     style: AppTextStyles.tituloItem,
                   ),
                   trailing: selecionado
-                      ? const Icon(Icons.check, color: AppColors.primaria)
+                      ? const Icon(AppIcons.check, color: AppColors.primaria)
                       : null,
                   onTap: () => Navigator.of(context).pop(cliente),
                 );

@@ -160,22 +160,14 @@ Future<EscolhaFoto?> perguntarOrigemFoto(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              opcao(
-                EscolhaFoto.camera,
-                Icons.photo_camera_outlined,
-                'Tirar foto',
-              ),
+              opcao(EscolhaFoto.camera, AppIcons.camera, 'Tirar foto'),
               opcao(
                 EscolhaFoto.galeria,
-                Icons.photo_library_outlined,
+                AppIcons.galeria,
                 'Escolher da galeria',
               ),
               if (temFoto)
-                opcao(
-                  EscolhaFoto.remover,
-                  Icons.delete_outline,
-                  'Remover foto',
-                ),
+                opcao(EscolhaFoto.remover, AppIcons.lixeira, 'Remover foto'),
             ],
           ),
         ),

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_dimens.dart';
+import '../../core/theme/app_icons.dart';
 import '../../core/theme/app_text_styles.dart';
 
 /// Campo com rótulo em caixa alta acima do texto. Feito para ficar dentro de
@@ -97,9 +98,7 @@ class _CampoTextoState extends State<CampoTexto> {
         button: true,
         label: _ocultarTexto ? 'Mostrar senha' : 'Ocultar senha',
         child: Icon(
-          _ocultarTexto
-              ? Icons.visibility_outlined
-              : Icons.visibility_off_outlined,
+          _ocultarTexto ? AppIcons.mostrarSenha : AppIcons.ocultarSenha,
           size: AppSizes.iconeCampo,
           color: AppColors.placeholder,
         ),
