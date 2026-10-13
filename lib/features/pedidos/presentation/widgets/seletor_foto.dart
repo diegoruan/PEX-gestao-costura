@@ -10,7 +10,7 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../../shared/widgets/icone_svg.dart';
 import '../../../../shared/widgets/indicador_carregando.dart';
 import '../../domain/pedido.dart';
-import 'foto_pedido.dart';
+import '../../../../shared/widgets/foto_pedido.dart';
 
 /// Quadrado de 80px do formulário: tracejado com "Adicionar" ou a foto
 /// escolhida (nova, em memória, ou a que já está salva).

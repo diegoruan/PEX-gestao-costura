@@ -5,9 +5,10 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/utils/formatadores.dart';
+import '../../../../shared/widgets/etiqueta.dart';
 import '../../../../shared/widgets/icone_svg.dart';
 import '../../domain/pedido.dart';
-import 'foto_pedido.dart';
+import '../../../../shared/widgets/foto_pedido.dart';
 
 class PedidoCard extends StatelessWidget {
   const PedidoCard({
@@ -175,16 +176,6 @@ class EtiquetaPrazo extends StatelessWidget {
         AppColors.alerta,
       ),
     };
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.sm,
-        vertical: AppSpacing.xxs,
-      ),
-      decoration: BoxDecoration(
-        color: fundo,
-        borderRadius: BorderRadius.circular(AppRadius.pilula),
-      ),
-      child: Text(texto, style: AppTextStyles.etiqueta.copyWith(color: cor)),
-    );
+    return Etiqueta(texto: texto, fundo: fundo, cor: cor);
   }
 }

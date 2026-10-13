@@ -269,6 +269,60 @@ abstract final class AppTextStyles {
     color: AppColors.textoPrincipal,
   );
 
+  /// Nome da peça no item do histórico, um pouco menor que [tituloItem].
+  static const tituloItemCompacto = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textoPrincipal,
+  );
+
+  /// Valor total no item do histórico.
+  static const valorItemCompacto = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 14.5,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textoValor,
+  );
+
+  /// Chips de filtro; a cor muda se o chip está selecionado.
+  static const chip = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 12,
+    fontWeight: FontWeight.w700,
+  );
+
+  /// Mês no cabeçalho dos grupos do histórico ("Setembro 2026").
+  static const rotuloMes = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 12,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textoValor,
+  );
+
+  /// Total do mês, à direita do [rotuloMes].
+  static const totalMes = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 12,
+    fontWeight: FontWeight.w700,
+    color: AppColors.primaria,
+  );
+
+  /// Números do cartão de resumo do histórico.
+  static const numeroResumo = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 20,
+    fontWeight: FontWeight.w700,
+    color: AppColors.primaria,
+  );
+
+  static const legendaMinima = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 9.5,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textoSecundario,
+  );
+
   static const snackbar = TextStyle(
     fontFamily: fontFamily,
     fontSize: 14,
