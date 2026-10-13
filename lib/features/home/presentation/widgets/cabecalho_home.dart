@@ -73,7 +73,7 @@ class CabecalhoHome extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.lg + AppSpacing.xs),
                 const Text(
-                  'Bem-vinda de volta,',
+                  'Bem-vindo de volta,',
                   style: AppTextStyles.saudacao,
                 ),
                 Text(
