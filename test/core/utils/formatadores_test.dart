@@ -43,6 +43,11 @@ void main() {
     expect(Formatadores.pecas(2), '2 peças');
   });
 
+  test('dia e mês numéricos dos pedidos recentes', () {
+    expect(Formatadores.diaMesNumerico(DateTime(2026, 9, 1)), '01/09');
+    expect(Formatadores.diaMesNumerico(DateTime(2026, 12, 25)), '25/12');
+  });
+
   test('pluraliza clientes', () {
     expect(Formatadores.clientes(1), '1 cliente');
     expect(Formatadores.clientes(4), '4 clientes');
