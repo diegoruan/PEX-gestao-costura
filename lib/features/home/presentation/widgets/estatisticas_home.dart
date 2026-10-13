@@ -82,10 +82,16 @@ class _Cartao extends StatelessWidget {
             IconeSvg(icone, tamanho: AppSizes.iconeEstatistica, cor: cor),
             Padding(
               padding: const EdgeInsets.only(top: AppSpacing.xs),
-              // "R$ 12.345" encolhe em vez de quebrar.
+              // "R$ 12.345" encolhe em vez de quebrar. O softWrap: false é o
+              // que importa: sem ele o IntrinsicHeight mede o texto quebrado
+              // em duas linhas e todos os cartões ganham um espaço vazio.
               child: FittedBox(
                 fit: BoxFit.scaleDown,
-                child: Text(valor, style: AppTextStyles.numeroDestaque),
+                child: Text(
+                  valor,
+                  style: AppTextStyles.numeroDestaque,
+                  softWrap: false,
+                ),
               ),
             ),
             Text(rotulo, style: AppTextStyles.legenda),

@@ -56,7 +56,11 @@ class _Numero extends StatelessWidget {
             // Totais grandes ("R$ 12.345,50") encolhem em vez de quebrar.
             FittedBox(
               fit: BoxFit.scaleDown,
-              child: Text(valor, style: AppTextStyles.numeroResumo),
+              child: Text(
+                valor,
+                style: AppTextStyles.numeroResumo,
+                softWrap: false,
+              ),
             ),
             Text(
               rotulo,

@@ -101,7 +101,11 @@ class _Estatistica extends StatelessWidget {
             const SizedBox(height: AppSpacing.xs),
             FittedBox(
               fit: BoxFit.scaleDown,
-              child: Text(valor, style: AppTextStyles.numeroEstatistica),
+              child: Text(
+                valor,
+                style: AppTextStyles.numeroEstatistica,
+                softWrap: false,
+              ),
             ),
             Text(
               rotulo,
