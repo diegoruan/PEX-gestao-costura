@@ -88,6 +88,10 @@ class _ListaPedidos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final agora = DateTime.now();
+    final atrasados = [
+      for (final p in pedidos)
+        if (p.prazo(agora) == PrazoPedido.atrasado) p,
+    ];
     final paraHoje = [
       for (final p in pedidos)
         if (p.prazo(agora) == PrazoPedido.hoje) p,
@@ -151,10 +155,17 @@ class _ListaPedidos extends StatelessWidget {
             ),
           ),
         ),
+        if (atrasados.isNotEmpty) ...[
+          AvisoPedido(
+            titulo: 'Entregas atrasadas',
+            mensagem: _resumo(atrasados),
+          ),
+          const SizedBox(height: AppSpacing.md),
+        ],
         if (paraHoje.isNotEmpty) ...[
           AvisoPedido(
             titulo: 'Entregas para hoje',
-            mensagem: _resumoHoje(paraHoje),
+            mensagem: _resumo(paraHoje),
           ),
           const SizedBox(height: AppSpacing.lg),
         ],
@@ -171,7 +182,7 @@ class _ListaPedidos extends StatelessWidget {
   };
 
   /// "Vestido Floral (Ana) e Calça Social (Pedro)"
-  String _resumoHoje(List<Pedido> pedidos) {
+  String _resumo(List<Pedido> pedidos) {
     final partes = [
       for (final p in pedidos) '${p.nome} (${p.clienteNome.split(' ').first})',
     ];

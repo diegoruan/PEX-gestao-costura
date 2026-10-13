@@ -7,7 +7,8 @@ import '../../../../core/theme/app_text_styles.dart';
 import '../../../../shared/widgets/icone_svg.dart';
 import '../../../../shared/widgets/link_texto.dart';
 
-/// Faixa rosada com sino, como o "Entregas para hoje" da lista.
+/// Faixa rosada com sino, como o "Entregas para hoje" da lista. Passe [cor]
+/// para recolorir sino e textos (ex.: [AppColors.erro] nos atrasados).
 class AvisoPedido extends StatelessWidget {
   const AvisoPedido({
     super.key,
@@ -15,12 +16,14 @@ class AvisoPedido extends StatelessWidget {
     required this.mensagem,
     this.textoAcao,
     this.onAcao,
+    this.cor,
   });
 
   final String titulo;
   final String mensagem;
   final String? textoAcao;
   final VoidCallback? onAcao;
+  final Color? cor;
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +40,24 @@ class AvisoPedido extends StatelessWidget {
       child: Row(
         spacing: AppSpacing.smd,
         children: [
-          const IconeSvg(AppAssets.iconeSino, tamanho: AppSizes.iconeResumo),
+          IconeSvg(
+            AppAssets.iconeSino,
+            tamanho: AppSizes.iconeResumo,
+            cor: cor,
+          ),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: AppSpacing.xxs,
               children: [
-                Text(titulo, style: AppTextStyles.avisoTitulo),
-                Text(mensagem, style: AppTextStyles.avisoTexto),
+                Text(
+                  titulo,
+                  style: AppTextStyles.avisoTitulo.copyWith(color: cor),
+                ),
+                Text(
+                  mensagem,
+                  style: AppTextStyles.avisoTexto.copyWith(color: cor),
+                ),
                 if (textoAcao != null)
                   LinkTexto(texto: textoAcao!, onPressed: onAcao),
               ],
