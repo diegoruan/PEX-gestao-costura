@@ -8,6 +8,7 @@ import '../../../core/theme/app_dimens.dart';
 import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../core/utils/formatadores.dart';
+import '../../../core/utils/texto.dart';
 import '../../../shared/widgets/botao_icone.dart';
 import '../../../shared/widgets/cabecalho_pagina.dart';
 import '../../../shared/widgets/estado_mensagem.dart';
@@ -183,12 +184,7 @@ class _ListaPedidos extends StatelessWidget {
   };
 
   /// "Vestido Floral (Ana) e Calça Social (Pedro)"
-  String _resumo(List<Pedido> pedidos) {
-    final partes = [
-      for (final p in pedidos) '${p.nome} (${p.clienteNome.split(' ').first})',
-    ];
-    if (partes.length == 1) return partes.first;
-    final ultima = partes.removeLast();
-    return '${partes.join(', ')} e $ultima';
-  }
+  String _resumo(List<Pedido> pedidos) => Texto.listar([
+    for (final p in pedidos) '${p.nome} (${Texto.primeiroNome(p.clienteNome)})',
+  ]);
 }

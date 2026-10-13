@@ -25,4 +25,14 @@ abstract final class Texto {
     }
     return (partes.first[0] + partes[1][0]).toUpperCase();
   }
+
+  /// "Ana Clara Souza" -> "Ana".
+  static String primeiroNome(String nome) => nome.trim().split(' ').first;
+
+  /// ["a", "b", "c"] -> "a, b e c"; ["a"] -> "a"; [] -> "".
+  static String listar(Iterable<String> itens) {
+    final lista = itens.toList();
+    if (lista.length <= 1) return lista.join();
+    return '${lista.sublist(0, lista.length - 1).join(', ')} e ${lista.last}';
+  }
 }

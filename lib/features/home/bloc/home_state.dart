@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../core/utils/texto.dart';
 import '../../fechamento/domain/calculador_fechamento.dart';
 import '../../pedidos/domain/pedido.dart';
 
@@ -74,15 +75,10 @@ class ResumoHome extends Equatable {
   }
 
   /// "Vestido Rosa (Ana) e Calça Social (Pedro)", atrasados primeiro.
-  String get textoAviso {
-    final partes = [
-      for (final p in [...atrasados, ...paraHoje])
-        '${p.nome} (${p.clienteNome.split(' ').first})',
-    ];
-    if (partes.length <= 1) return partes.join();
-    final ultima = partes.removeLast();
-    return '${partes.join(', ')} e $ultima';
-  }
+  String get textoAviso => Texto.listar([
+    for (final p in [...atrasados, ...paraHoje])
+      '${p.nome} (${Texto.primeiroNome(p.clienteNome)})',
+  ]);
 
   /// Pendente: quando foi cadastrado; finalizado: quando foi entregue.
   static DateTime _movimentadoEm(Pedido p) =>

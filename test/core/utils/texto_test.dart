@@ -28,4 +28,18 @@ void main() {
       expect(Texto.iniciais('A'), 'A');
     });
   });
+
+  group('Texto.listar', () {
+    test('junta com vírgulas e "e" antes do último', () {
+      expect(Texto.listar(['a', 'b', 'c']), 'a, b e c');
+      expect(Texto.listar(['a', 'b']), 'a e b');
+      expect(Texto.listar(['a']), 'a');
+      expect(Texto.listar(const []), '');
+    });
+  });
+
+  test('Texto.primeiroNome', () {
+    expect(Texto.primeiroNome(' Ana Clara Souza'), 'Ana');
+    expect(Texto.primeiroNome('Regina'), 'Regina');
+  });
 }
