@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/theme/app_dimens.dart';
 import '../../../core/theme/app_icons.dart';
+import '../../../core/utils/formatadores.dart';
 import '../../../shared/widgets/cabecalho_pagina.dart';
 import '../../../shared/widgets/campo_busca.dart';
+import '../../../shared/widgets/cartao_numeros.dart';
 import '../../../shared/widgets/estado_mensagem.dart';
 import '../../../shared/widgets/indicador_carregando.dart';
 import '../../pedidos/domain/pedido.dart';
@@ -12,7 +14,6 @@ import '../bloc/historico_bloc.dart';
 import 'widgets/cabecalho_mes.dart';
 import 'widgets/filtros_historico.dart';
 import 'widgets/historico_item.dart';
-import 'widgets/resumo_historico_card.dart';
 
 /// Peças já finalizadas, agrupadas pelo mês de finalização. Somente leitura.
 class HistoricoPage extends StatelessWidget {
@@ -108,7 +109,7 @@ class _Lista extends StatelessWidget {
         AppSpacing.xxl,
       ),
       children: [
-        ResumoHistoricoCard(resumo: ResumoHistorico.de(pedidos)),
+        _Resumo(resumo: ResumoHistorico.de(pedidos)),
         for (final mes in MesHistorico.agrupar(pedidos)) ...[
           CabecalhoMes(mes: mes),
           for (final pedido in mes.pedidos)
@@ -117,6 +118,27 @@ class _Lista extends StatelessWidget {
               child: HistoricoItem(pedido: pedido),
             ),
         ],
+      ],
+    );
+  }
+}
+
+/// Peças, total faturado e clientes do que está filtrado.
+class _Resumo extends StatelessWidget {
+  const _Resumo({required this.resumo});
+
+  final ResumoHistorico resumo;
+
+  @override
+  Widget build(BuildContext context) {
+    return CartaoNumeros(
+      itens: [
+        (valor: '${resumo.pecas}', rotulo: 'Peças entregues'),
+        (
+          valor: Formatadores.moedaCompacta(resumo.totalCentavos),
+          rotulo: 'Total faturado',
+        ),
+        (valor: '${resumo.clientes}', rotulo: 'Clientes ativos'),
       ],
     );
   }
