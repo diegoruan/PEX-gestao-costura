@@ -26,4 +26,13 @@ abstract final class AppAssets {
   static const iconeSalvar = 'assets/images/icone_salvar.svg';
   static const iconePacote = 'assets/images/icone_pacote.svg';
   static const iconeClientes = 'assets/images/icone_clientes.svg';
+  static const iconeCasa = 'assets/images/icone_casa.svg';
+  static const iconePessoas = 'assets/images/icone_pessoas.svg';
+  static const iconeDocumento = 'assets/images/icone_documento.svg';
+  static const iconeGrafico = 'assets/images/icone_grafico.svg';
+  static const iconeCarretel = 'assets/images/icone_carretel.svg';
+  static const iconeAgenda = 'assets/images/icone_agenda.svg';
+  static const iconeAlerta = 'assets/images/icone_alerta.svg';
+  static const iconeAdicionar = 'assets/images/icone_adicionar.svg';
+  static const iconeDocumentoTexto = 'assets/images/icone_documento_texto.svg';
 }

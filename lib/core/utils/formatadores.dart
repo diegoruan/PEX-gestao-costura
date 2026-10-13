@@ -9,6 +9,7 @@ abstract final class Formatadores {
     decimalDigits: 0,
   );
   static final _data = DateFormat('dd/MM/yyyy', 'pt_BR');
+  static final _diaMesNumerico = DateFormat('dd/MM', 'pt_BR');
   static final _dataHora = DateFormat('dd/MM/yyyy HH:mm', 'pt_BR');
   static final _mesAno = DateFormat('MMMM/yyyy', 'pt_BR');
   static final _mesAnoTitulo = DateFormat('MMMM yyyy', 'pt_BR');
@@ -51,6 +52,9 @@ abstract final class Formatadores {
 
   /// DateTime(2026, 9, 3) -> "3 set"
   static String diaMes(DateTime data) => '${data.day} ${_mes(data)}';
+
+  /// DateTime(2026, 9, 3) -> "03/09"
+  static String diaMesNumerico(DateTime data) => _diaMesNumerico.format(data);
 
   /// DateTime(2026, 9, 3) -> "3 set 2026"
   static String diaMesAno(DateTime data) => '${diaMes(data)} ${data.year}';

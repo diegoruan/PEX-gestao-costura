@@ -387,6 +387,90 @@ abstract final class AppTextStyles {
     color: AppColors.textoValor,
   );
 
+  /// Rótulos da barra de navegação inferior.
+  static const rotuloNavegacao = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 10,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textoSecundario,
+  );
+
+  static const rotuloNavegacaoAtivo = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 10,
+    fontWeight: FontWeight.w700,
+    color: AppColors.primaria,
+  );
+
+  /// "Ateliê" no cabeçalho rosa da Home.
+  static const marcaCabecalho = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 0.5,
+    color: AppColors.textoSobrePrimaria,
+  );
+
+  static const subtituloCabecalho = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 10.5,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textoSobrePrimariaSuave,
+  );
+
+  static const saudacao = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textoSobrePrimariaSuave,
+  );
+
+  static const nomeUsuario = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 20,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textoSobrePrimaria,
+  );
+
+  /// Números dos cartões do topo da Home.
+  static const numeroDestaque = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 22,
+    fontWeight: FontWeight.w700,
+    color: AppColors.primaria,
+  );
+
+  /// Aviso amarelo de entregas da Home.
+  static const alertaTitulo = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: AppColors.alertaTexto,
+  );
+
+  static const alertaMensagem = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 12.5,
+    fontWeight: FontWeight.w400,
+    color: AppColors.alerta,
+  );
+
+  /// Link discreto ao lado de um título de seção ("Ver todos →").
+  static const linkPequeno = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 12.5,
+    fontWeight: FontWeight.w400,
+    color: AppColors.primaria,
+  );
+
+  /// Nome da peça nos pedidos recentes da Home.
+  static const tituloItemPequeno = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 12.5,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textoPrincipal,
+  );
+
   static const snackbar = TextStyle(
     fontFamily: fontFamily,
     fontSize: 14,

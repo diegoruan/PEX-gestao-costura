@@ -24,7 +24,7 @@ abstract final class AppRoutes {
   static const loginPath = '/login';
   static const cadastroPath = '/cadastro';
   static const recuperarSenhaPath = '/recuperar-senha';
-  static const homePath = '/';
+  static const homePath = '/home';
 
   /// /clientes, /clientes/novo, /clientes/:id e /clientes/:id/editar.
   /// Os caminhos filhos são relativos ao pai no go_router.

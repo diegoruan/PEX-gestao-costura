@@ -30,6 +30,9 @@ abstract final class AppColors {
   static const alerta = Color(0xFFC9973A);
   static const alertaTexto = Color(0xFF8B6520);
   static const alertaFundo = Color(0xFFFFF3D8);
+
+  /// Fundo do ícone de "Fechamento" no acesso rápido da Home.
+  static const alertaSuave = Color(0xFFF5E8CF);
   static const erro = Color(0xFFB3424A);
 
   static const sombra = textoPrincipal;
@@ -42,6 +45,9 @@ abstract final class AppColors {
 
   /// Fundo quase invisível dos botões do seletor de mês do fechamento.
   static const superficieSutil = Color(0x33FFFFFF);
+
+  /// Caixinhas brancas translúcidas sobre o cabeçalho rosa da Home.
+  static const superficieSobrePrimaria = Color(0x40FFFFFF);
 
   /// Fundos dos avatares de iniciais, na ordem usada no Figma.
   static const avatares = [primaria, textoValor, alerta, sucesso];
