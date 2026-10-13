@@ -42,4 +42,16 @@ void main() {
     expect(Formatadores.pecas(1), '1 peça');
     expect(Formatadores.pecas(2), '2 peças');
   });
+
+  test('pluraliza clientes', () {
+    expect(Formatadores.clientes(1), '1 cliente');
+    expect(Formatadores.clientes(4), '4 clientes');
+  });
+
+  test('mês e ano curtos do fechamento, inclusive na virada do ano', () {
+    expect(Formatadores.mesAnoCurto(DateTime(2026, 8)), 'ago/26');
+    expect(Formatadores.mesAnoCurto(DateTime(2026, 12, 31)), 'dez/26');
+    expect(Formatadores.mesAnoCurto(DateTime(2027, 1)), 'jan/27');
+    expect(Formatadores.mesAnoCurto(DateTime(2100, 5)), 'mai/00');
+  });
 }

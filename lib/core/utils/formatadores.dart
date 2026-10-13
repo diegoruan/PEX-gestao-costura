@@ -42,6 +42,10 @@ abstract final class Formatadores {
     return texto[0].toUpperCase() + texto.substring(1);
   }
 
+  /// DateTime(2026, 8) -> "ago/26"
+  static String mesAnoCurto(DateTime data) =>
+      '${_mes(data)}/${(data.year % 100).toString().padLeft(2, '0')}';
+
   /// DateTime(2025, 3) -> "março de 2025"
   static String mesAnoExtenso(DateTime data) => _mesAnoExtenso.format(data);
 
@@ -60,6 +64,10 @@ abstract final class Formatadores {
   /// 1 -> "1 peça"; 3 -> "3 peças"
   static String pecas(int quantidade) =>
       quantidade == 1 ? '1 peça' : '$quantidade peças';
+
+  /// 1 -> "1 cliente"; 4 -> "4 clientes"
+  static String clientes(int quantidade) =>
+      quantidade == 1 ? '1 cliente' : '$quantidade clientes';
 
   // O intl abrevia com ponto ("set."); o Figma usa sem.
   static String _mes(DateTime data) =>

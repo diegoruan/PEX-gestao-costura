@@ -14,6 +14,8 @@ import '../../features/clientes/data/cliente_repository.dart';
 import '../../features/clientes/presentation/cliente_detalhe_page.dart';
 import '../../features/clientes/presentation/cliente_form_page.dart';
 import '../../features/clientes/presentation/clientes_page.dart';
+import '../../features/fechamento/bloc/fechamento_bloc.dart';
+import '../../features/fechamento/presentation/fechamento_page.dart';
 import '../../features/historico/bloc/historico_bloc.dart';
 import '../../features/historico/presentation/historico_page.dart';
 import '../../features/home/presentation/home_page.dart';
@@ -59,6 +61,7 @@ GoRouter criarRouter(AuthBloc authBloc) {
       _rotasClientes(),
       _rotasPedidos(),
       _rotaHistorico(),
+      _rotaFechamento(),
     ],
   );
 }
@@ -175,6 +178,20 @@ GoRoute _rotaHistorico() {
           HistoricoBloc(pedidoRepository: context.read<PedidoRepository>())
             ..add(const HistoricoIniciado()),
       child: const HistoricoPage(),
+    ),
+  );
+}
+
+/// Mesma ideia do histórico: uma tela, um bloc criado na própria rota.
+GoRoute _rotaFechamento() {
+  return GoRoute(
+    name: AppRoutes.fechamento,
+    path: AppRoutes.fechamentoPath,
+    builder: (context, state) => BlocProvider(
+      create: (context) =>
+          FechamentoBloc(pedidoRepository: context.read<PedidoRepository>())
+            ..add(const FechamentoIniciado()),
+      child: const FechamentoPage(),
     ),
   );
 }

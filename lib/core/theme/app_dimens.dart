@@ -112,6 +112,15 @@ abstract final class AppShadows {
     ),
   ];
 
+  /// Cartão do total geral no fim do fechamento.
+  static final cartaoDestaque = [
+    BoxShadow(
+      color: AppColors.primaria.withValues(alpha: 0.3),
+      offset: const Offset(0, 4),
+      blurRadius: 8,
+    ),
+  ];
+
   static final logo = [
     BoxShadow(
       color: AppColors.primaria.withValues(alpha: 0.25),
