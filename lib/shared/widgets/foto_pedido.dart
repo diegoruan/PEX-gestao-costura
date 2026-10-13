@@ -3,14 +3,14 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/theme/app_assets.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../shared/widgets/icone_svg.dart';
-import '../../data/pedido_repository.dart';
-import '../../domain/pedido.dart';
+import '../../core/theme/app_assets.dart';
+import '../../core/theme/app_colors.dart';
+import '../../features/pedidos/data/pedido_repository.dart';
+import '../../features/pedidos/domain/pedido.dart';
+import 'icone_svg.dart';
 
 /// Foto do pedido. Sem foto (ou enquanto ela carrega, ou se falhar), mostra
-/// a camiseta do Figma sobre o fundo bege.
+/// a camiseta do Figma sobre o fundo bege. Usada em pedidos e no histórico.
 ///
 /// Lê a imagem direto do [PedidoRepository] em vez de passar pelo bloc: é só
 /// leitura de exibição, e o repository já guarda as fotos lidas em cache.

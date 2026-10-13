@@ -19,7 +19,7 @@ import '../../../shared/widgets/snackbar_mensagem.dart';
 import '../bloc/pedidos_bloc.dart';
 import '../domain/pedido.dart';
 import 'widgets/acoes_pedido.dart';
-import 'widgets/foto_pedido.dart';
+import '../../../shared/widgets/foto_pedido.dart';
 
 class PedidoDetalhePage extends StatelessWidget {
   const PedidoDetalhePage({super.key, required this.pedidoId});
