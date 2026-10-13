@@ -14,6 +14,8 @@ void main() {
     expect(Formatadores.data(DateTime(2026, 9, 1)), '01/09/2026');
     expect(Formatadores.mesAno(DateTime(2026, 9)), 'setembro/2026');
     expect(Formatadores.mesAnoExtenso(DateTime(2025, 3)), 'março de 2025');
+    expect(Formatadores.mesAnoTitulo(DateTime(2026, 9)), 'Setembro 2026');
+    expect(Formatadores.mesAnoTitulo(DateTime(2027, 1, 31)), 'Janeiro 2027');
   });
 
   test('formata valores em centavos', () {
