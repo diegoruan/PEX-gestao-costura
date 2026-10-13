@@ -50,6 +50,8 @@ abstract final class AppSizes {
   static const iconeMiniatura = 28.0;
   static const miniaturaHistorico = 52.0;
   static const iconeMiniaturaHistorico = 26.0;
+  static const miniaturaCliente = 48.0;
+  static const iconeMiniaturaCliente = 24.0;
   static const iconeMes = 14.0;
   static const fotoFormulario = 80.0;
   static const iconeFotoFormulario = 22.0;
