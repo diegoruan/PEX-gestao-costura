@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/routes/app_routes.dart';
-import '../../../core/theme/app_assets.dart';
+import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimens.dart';
+import '../../../core/theme/app_icons.dart';
 import '../../../core/utils/validadores.dart';
 import '../../../shared/widgets/botao_pequeno.dart';
 import '../../../shared/widgets/botao_suave.dart';
@@ -12,7 +13,6 @@ import '../../../shared/widgets/cabecalho_pagina.dart';
 import '../../../shared/widgets/campo_texto.dart';
 import '../../../shared/widgets/cartao_formulario.dart';
 import '../../../shared/widgets/estado_mensagem.dart';
-import '../../../shared/widgets/icone_svg.dart';
 import '../../../shared/widgets/indicador_carregando.dart';
 import '../../../shared/widgets/rotulo_secao.dart';
 import '../../../shared/widgets/snackbar_mensagem.dart';
@@ -280,9 +280,10 @@ class _ClienteFormPageState extends State<ClienteFormPage> {
               const SizedBox(height: AppSpacing.xxl * 2),
               BotaoSuave(
                 texto: 'Excluir cliente',
-                icone: const IconeSvg(
-                  AppAssets.iconeLixeira,
-                  tamanho: AppSizes.iconePequeno,
+                icone: const Icon(
+                  AppIcons.lixeira,
+                  size: AppSizes.iconePequeno,
+                  color: AppColors.primaria,
                 ),
                 carregando: acao == AcaoCliente.inativando,
                 onPressed: ocupado

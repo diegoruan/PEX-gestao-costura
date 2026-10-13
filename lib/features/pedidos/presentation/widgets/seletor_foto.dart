@@ -3,14 +3,13 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
 import '../../../../core/services/imagem_service.dart';
-import '../../../../core/theme/app_assets.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
+import '../../../../core/theme/app_icons.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../../../shared/widgets/icone_svg.dart';
+import '../../../../shared/widgets/foto_pedido.dart';
 import '../../../../shared/widgets/indicador_carregando.dart';
 import '../../domain/pedido.dart';
-import '../../../../shared/widgets/foto_pedido.dart';
 
 /// Quadrado de 80px do formulário: tracejado com "Adicionar" ou a foto
 /// escolhida (nova, em memória, ou a que já está salva).
@@ -50,9 +49,10 @@ class SeletorFoto extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         spacing: AppSpacing.xsm,
         children: [
-          IconeSvg(
-            AppAssets.iconeCamera,
-            tamanho: AppSizes.iconeFotoFormulario,
+          Icon(
+            AppIcons.camera,
+            size: AppSizes.iconeFotoFormulario,
+            color: AppColors.textoSecundario,
           ),
           Text('Adicionar', style: AppTextStyles.legendaPequena),
         ],

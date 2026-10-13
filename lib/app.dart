@@ -4,10 +4,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import 'core/routes/app_router.dart';
+import 'core/services/imagem_service.dart';
 import 'core/theme/app_theme.dart';
 import 'features/auth/bloc/auth_bloc.dart';
 import 'features/auth/data/auth_repository.dart';
-import 'core/services/imagem_service.dart';
 import 'features/clientes/data/cliente_repository.dart';
 import 'features/pedidos/data/pedido_repository.dart';
 

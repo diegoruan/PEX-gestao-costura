@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/routes/app_routes.dart';
-import '../../../../core/theme/app_assets.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
+import '../../../../core/theme/app_icons.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../../../shared/widgets/icone_svg.dart';
 
 /// Grade 2×2 de atalhos da Home.
 class AcessoRapido extends StatelessWidget {
@@ -17,7 +16,7 @@ class AcessoRapido extends StatelessWidget {
     // goNamed nas abas troca de aba; o formulário abre por cima (push).
     final atalhos = [
       _Atalho(
-        icone: AppAssets.iconeAdicionar,
+        icone: AppIcons.adicionar,
         cor: AppColors.primaria,
         fundo: AppColors.primariaClara,
         titulo: 'Novo Pedido',
@@ -25,7 +24,7 @@ class AcessoRapido extends StatelessWidget {
         onTap: () => context.pushNamed(AppRoutes.pedidoNovo),
       ),
       _Atalho(
-        icone: AppAssets.iconePessoas,
+        icone: AppIcons.pessoas,
         cor: AppColors.textoValor,
         fundo: AppColors.bege,
         titulo: 'Clientes',
@@ -33,7 +32,7 @@ class AcessoRapido extends StatelessWidget {
         onTap: () => context.goNamed(AppRoutes.clientes),
       ),
       _Atalho(
-        icone: AppAssets.iconeDocumentoTexto,
+        icone: AppIcons.documentoTexto,
         cor: AppColors.sucesso,
         fundo: AppColors.sucessoFundo,
         titulo: 'Histórico',
@@ -41,7 +40,7 @@ class AcessoRapido extends StatelessWidget {
         onTap: () => context.goNamed(AppRoutes.historico),
       ),
       _Atalho(
-        icone: AppAssets.iconeGrafico,
+        icone: AppIcons.grafico,
         cor: AppColors.alerta,
         fundo: AppColors.alertaSuave,
         titulo: 'Fechamento',
@@ -81,7 +80,7 @@ class _Atalho extends StatelessWidget {
     required this.onTap,
   });
 
-  final String icone;
+  final IconData icone;
   final Color cor;
   final Color fundo;
   final String titulo;
@@ -118,11 +117,7 @@ class _Atalho extends StatelessWidget {
                     color: fundo,
                     borderRadius: BorderRadius.circular(AppRadius.pequeno),
                   ),
-                  child: IconeSvg(
-                    icone,
-                    tamanho: AppSizes.iconeResumo,
-                    cor: cor,
-                  ),
+                  child: Icon(icone, size: AppSizes.iconeResumo, color: cor),
                 ),
                 Text(titulo, style: AppTextStyles.tituloItemCompacto),
                 Text(subtitulo, style: AppTextStyles.legendaPequena),

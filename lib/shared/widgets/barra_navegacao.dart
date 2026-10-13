@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_dimens.dart';
 import '../../core/theme/app_text_styles.dart';
-import 'icone_svg.dart';
 
 class ItemNavegacao {
   const ItemNavegacao({required this.icone, required this.rotulo});
 
-  /// Constante de `AppAssets`.
-  final String icone;
+  /// Constante de `AppIcons`.
+  final IconData icone;
   final String rotulo;
 }
 
@@ -79,10 +78,10 @@ class _Item extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           spacing: AppSpacing.xxs,
           children: [
-            IconeSvg(
+            Icon(
               item.icone,
-              tamanho: AppSizes.iconeNavegacao,
-              cor: ativo ? AppColors.primaria : AppColors.textoSecundario,
+              size: AppSizes.iconeNavegacao,
+              color: ativo ? AppColors.primaria : AppColors.textoSecundario,
             ),
             Text(
               item.rotulo,

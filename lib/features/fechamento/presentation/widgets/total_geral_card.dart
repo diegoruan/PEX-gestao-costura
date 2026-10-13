@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/app_assets.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
+import '../../../../core/theme/app_icons.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/utils/formatadores.dart';
-import '../../../../shared/widgets/icone_svg.dart';
 import '../../domain/fechamento_mensal.dart';
 
 /// Cartão do fim da tela com o total geral do mês.
@@ -84,10 +83,10 @@ class _SeloFechado extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         spacing: AppSpacing.xsm,
         children: [
-          IconeSvg(
-            AppAssets.iconeCheck,
-            tamanho: AppSizes.iconePequeno,
-            cor: AppColors.textoValor,
+          Icon(
+            AppIcons.check,
+            size: AppSizes.iconePequeno,
+            color: AppColors.textoValor,
           ),
           Text('Fechado', style: AppTextStyles.selo),
         ],

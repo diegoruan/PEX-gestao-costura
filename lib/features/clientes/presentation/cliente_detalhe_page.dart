@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/routes/app_routes.dart';
-import '../../../core/theme/app_assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimens.dart';
+import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../core/utils/formatadores.dart';
 import '../../../shared/widgets/avatar_iniciais.dart';
@@ -15,7 +15,6 @@ import '../../../shared/widgets/cabecalho_pagina.dart';
 import '../../../shared/widgets/cartao_informacoes.dart';
 import '../../../shared/widgets/cartao_numeros.dart';
 import '../../../shared/widgets/estado_mensagem.dart';
-import '../../../shared/widgets/icone_svg.dart';
 import '../../../shared/widgets/indicador_carregando.dart';
 import '../../../shared/widgets/snackbar_mensagem.dart';
 import '../../historico/bloc/historico_bloc.dart';
@@ -112,9 +111,10 @@ class _Detalhe extends StatelessWidget {
             BotaoIcone(
               descricao: 'Editar cliente',
               estilo: EstiloBotaoIcone.translucido,
-              icone: const IconeSvg(
-                AppAssets.iconeEditar,
-                tamanho: AppSizes.iconePequeno,
+              icone: const Icon(
+                AppIcons.editar,
+                size: AppSizes.iconePequeno,
+                color: AppColors.textoPrincipal,
               ),
               onPressed: () => context.pushNamed(
                 AppRoutes.clienteEditar,
@@ -175,27 +175,30 @@ class _Detalhe extends StatelessWidget {
                 titulo: 'Dados de contato',
                 linhas: [
                   LinhaInformacao(
-                    icone: const IconeSvg(
-                      AppAssets.iconeTelefone,
-                      tamanho: AppSizes.iconeContato,
+                    icone: const Icon(
+                      AppIcons.telefone,
+                      size: AppSizes.iconeContato,
+                      color: AppColors.textoSecundario,
                     ),
                     rotulo: 'Telefone',
                     valor: cliente.telefone ?? 'Não informado',
                     destacar: cliente.telefone != null,
                   ),
                   LinhaInformacao(
-                    icone: const IconeSvg(
-                      AppAssets.iconeEmail,
-                      tamanho: AppSizes.iconeContato,
+                    icone: const Icon(
+                      AppIcons.email,
+                      size: AppSizes.iconeContato,
+                      color: AppColors.textoSecundario,
                     ),
                     rotulo: 'E-mail',
                     valor: cliente.email ?? 'Não informado',
                     destacar: cliente.email != null,
                   ),
                   LinhaInformacao(
-                    icone: const IconeSvg(
-                      AppAssets.iconeEndereco,
-                      tamanho: AppSizes.iconeContato,
+                    icone: const Icon(
+                      AppIcons.endereco,
+                      size: AppSizes.iconeContato,
+                      color: AppColors.textoSecundario,
                     ),
                     rotulo: 'Endereço',
                     valor: cliente.endereco ?? 'Não informado',
@@ -222,10 +225,10 @@ class _Detalhe extends StatelessWidget {
                 padding: const EdgeInsets.only(top: AppSpacing.xsm),
                 child: BotaoPrimario(
                   texto: 'Novo Pedido para ${cliente.nomeExibicao}',
-                  icone: const IconeSvg(
-                    AppAssets.iconeAdicionar,
-                    tamanho: AppSizes.iconeBotao,
-                    cor: AppColors.textoSobrePrimaria,
+                  icone: const Icon(
+                    AppIcons.adicionar,
+                    size: AppSizes.iconeBotao,
+                    color: AppColors.textoSobrePrimaria,
                   ),
                   onPressed: excluindo
                       ? null
@@ -310,9 +313,10 @@ class _MenuMaisAcoes extends StatelessWidget {
     return MenuAnchor(
       menuChildren: [
         MenuItemButton(
-          leadingIcon: const IconeSvg(
-            AppAssets.iconeLixeira,
-            tamanho: AppSizes.iconePequeno,
+          leadingIcon: const Icon(
+            AppIcons.lixeira,
+            size: AppSizes.iconePequeno,
+            color: AppColors.primaria,
           ),
           style: MenuItemButton.styleFrom(
             foregroundColor: AppColors.primaria,
@@ -325,9 +329,10 @@ class _MenuMaisAcoes extends StatelessWidget {
       builder: (context, controller, _) => BotaoIcone(
         descricao: 'Mais ações',
         estilo: EstiloBotaoIcone.translucido,
-        icone: const IconeSvg(
-          AppAssets.iconeMais,
-          tamanho: AppSizes.iconePequeno,
+        icone: const Icon(
+          AppIcons.mais,
+          size: AppSizes.iconePequeno,
+          color: AppColors.textoPrincipal,
         ),
         onPressed: !habilitado
             ? null

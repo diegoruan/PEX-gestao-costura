@@ -4,22 +4,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/routes/app_routes.dart';
-import '../../../core/theme/app_assets.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimens.dart';
+import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../core/utils/formatadores.dart';
 import '../../../shared/widgets/avatar_iniciais.dart';
 import '../../../shared/widgets/botao_icone.dart';
 import '../../../shared/widgets/botao_suave.dart';
 import '../../../shared/widgets/estado_mensagem.dart';
-import '../../../shared/widgets/icone_svg.dart';
+import '../../../shared/widgets/foto_pedido.dart';
 import '../../../shared/widgets/indicador_carregando.dart';
 import '../../../shared/widgets/snackbar_mensagem.dart';
 import '../bloc/pedidos_bloc.dart';
 import '../domain/pedido.dart';
 import 'widgets/acoes_pedido.dart';
-import '../../../shared/widgets/foto_pedido.dart';
 
 class PedidoDetalhePage extends StatelessWidget {
   const PedidoDetalhePage({super.key, required this.pedidoId});
@@ -141,7 +140,7 @@ class _Detalhe extends StatelessWidget {
                       Expanded(
                         child: _BotaoAcao(
                           texto: 'Editar',
-                          icone: AppAssets.iconeEditar,
+                          icone: AppIcons.editar,
                           principal: false,
                           onPressed: ocupado ? null : () => _editar(context),
                         ),
@@ -150,7 +149,7 @@ class _Detalhe extends StatelessWidget {
                         flex: 2,
                         child: _BotaoAcao(
                           texto: 'Marcar como Entregue',
-                          icone: AppAssets.iconeCheck,
+                          icone: AppIcons.check,
                           principal: true,
                           carregando: acao == AcaoPedido.finalizando,
                           onPressed: ocupado
@@ -164,9 +163,10 @@ class _Detalhe extends StatelessWidget {
                 ),
                 BotaoSuave(
                   texto: 'Excluir pedido',
-                  icone: const IconeSvg(
-                    AppAssets.iconeLixeira,
-                    tamanho: AppSizes.iconeAcao,
+                  icone: const Icon(
+                    AppIcons.lixeira,
+                    size: AppSizes.iconeAcao,
+                    color: AppColors.primaria,
                   ),
                   carregando: acao == AcaoPedido.excluindo,
                   onPressed: ocupado
@@ -204,11 +204,7 @@ class _Topo extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            FotoPedido(
-              pedido: pedido,
-              tamanhoIcone: AppSizes.iconeFotoDetalhe,
-              iconeGrande: true,
-            ),
+            FotoPedido(pedido: pedido, tamanhoIcone: AppSizes.iconeFotoDetalhe),
             const DecoratedBox(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -238,10 +234,10 @@ class _Topo extends StatelessWidget {
                     children: [
                       _BotaoSobreFoto(
                         descricao: 'Voltar',
-                        icone: const IconeSvg(
-                          AppAssets.iconeVoltar,
-                          tamanho: AppSizes.iconeBotao,
-                          cor: corIcone,
+                        icone: const Icon(
+                          AppIcons.voltar,
+                          size: AppSizes.iconeBotao,
+                          color: corIcone,
                         ),
                         onPressed: () => context.canPop()
                             ? context.pop()
@@ -250,10 +246,10 @@ class _Topo extends StatelessWidget {
                       const Spacer(),
                       _BotaoSobreFoto(
                         descricao: 'Editar pedido',
-                        icone: const IconeSvg(
-                          AppAssets.iconeEditar,
-                          tamanho: AppSizes.iconePequeno,
-                          cor: corIcone,
+                        icone: const Icon(
+                          AppIcons.editar,
+                          size: AppSizes.iconePequeno,
+                          color: corIcone,
                         ),
                         onPressed: !habilitado
                             ? null
@@ -318,9 +314,10 @@ class _MenuMaisAcoes extends StatelessWidget {
     return MenuAnchor(
       menuChildren: [
         MenuItemButton(
-          leadingIcon: const IconeSvg(
-            AppAssets.iconeLixeira,
-            tamanho: AppSizes.iconePequeno,
+          leadingIcon: const Icon(
+            AppIcons.lixeira,
+            size: AppSizes.iconePequeno,
+            color: AppColors.primaria,
           ),
           style: MenuItemButton.styleFrom(
             foregroundColor: AppColors.primaria,
@@ -332,10 +329,10 @@ class _MenuMaisAcoes extends StatelessWidget {
       ],
       builder: (context, controller, _) => _BotaoSobreFoto(
         descricao: 'Mais ações',
-        icone: const IconeSvg(
-          AppAssets.iconeMais,
-          tamanho: AppSizes.iconePequeno,
-          cor: AppColors.textoSobrePrimaria,
+        icone: const Icon(
+          AppIcons.mais,
+          size: AppSizes.iconePequeno,
+          color: AppColors.textoSobrePrimaria,
         ),
         onPressed: !habilitado
             ? null
@@ -361,7 +358,7 @@ class _Resumo extends StatelessWidget {
           children: [
             Expanded(
               child: _ItemResumo(
-                icone: AppAssets.iconeDolar,
+                icone: AppIcons.dolar,
                 rotulo: 'Valor total',
                 valor: Formatadores.moedaCentavos(pedido.totalCentavos),
                 cor: AppColors.primaria,
@@ -369,7 +366,7 @@ class _Resumo extends StatelessWidget {
             ),
             Expanded(
               child: _ItemResumo(
-                icone: AppAssets.iconeQuantidade,
+                icone: AppIcons.quantidade,
                 rotulo: 'Quantidade',
                 valor: Formatadores.pecas(pedido.quantidade),
               ),
@@ -381,14 +378,14 @@ class _Resumo extends StatelessWidget {
           children: [
             Expanded(
               child: _ItemResumo(
-                icone: AppAssets.iconeEtiqueta,
+                icone: AppIcons.etiqueta,
                 rotulo: 'Valor unitário',
                 valor: Formatadores.moedaCentavos(pedido.valorUnitarioCentavos),
               ),
             ),
             Expanded(
               child: _ItemResumo(
-                icone: AppAssets.iconeCalendario,
+                icone: AppIcons.calendario,
                 rotulo: 'Entrega',
                 valor: Formatadores.diaMesAno(pedido.dataEntrega),
                 cor: AppColors.alerta,
@@ -409,7 +406,7 @@ class _ItemResumo extends StatelessWidget {
     this.cor,
   });
 
-  final String icone;
+  final IconData icone;
   final String rotulo;
   final String valor;
 
@@ -431,7 +428,11 @@ class _ItemResumo extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: AppSpacing.xs),
-            child: IconeSvg(icone, tamanho: AppSizes.iconeResumo, cor: cor),
+            child: Icon(
+              icone,
+              size: AppSizes.iconeResumo,
+              color: cor ?? AppColors.textoSecundario,
+            ),
           ),
           Text(rotulo.toUpperCase(), style: AppTextStyles.rotuloCampo),
           Text(
@@ -513,7 +514,7 @@ class _BotaoAcao extends StatelessWidget {
   });
 
   final String texto;
-  final String icone;
+  final IconData icone;
   final bool principal;
   final VoidCallback? onPressed;
   final bool carregando;
@@ -554,7 +555,7 @@ class _BotaoAcao extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   spacing: AppSpacing.sm,
                   children: [
-                    IconeSvg(icone, tamanho: AppSizes.iconeAcao, cor: corTexto),
+                    Icon(icone, size: AppSizes.iconeAcao, color: corTexto),
                     Flexible(
                       child: Text(
                         texto,

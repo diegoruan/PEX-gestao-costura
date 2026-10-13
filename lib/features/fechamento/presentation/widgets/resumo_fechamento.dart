@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/app_assets.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
+import '../../../../core/theme/app_icons.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/utils/formatadores.dart';
-import '../../../../shared/widgets/icone_svg.dart';
 import '../../domain/fechamento_mensal.dart';
 
 /// Topo do fechamento: total do mês em destaque e os três cartõezinhos.
@@ -48,17 +47,17 @@ class ResumoFechamento extends StatelessWidget {
             spacing: AppSpacing.md,
             children: [
               _Estatistica(
-                icone: AppAssets.iconePacote,
+                icone: AppIcons.pacote,
                 valor: '${fechamento.quantidadePecas}',
                 rotulo: 'Peças entregues',
               ),
               _Estatistica(
-                icone: AppAssets.iconeClientes,
+                icone: AppIcons.pessoas,
                 valor: '$clientes',
                 rotulo: 'Clientes ativos',
               ),
               _Estatistica(
-                icone: AppAssets.iconeCalendarioPequeno,
+                icone: AppIcons.calendario,
                 valor: Formatadores.mesAnoCurto(fechamento.mes),
                 rotulo: 'Referência',
               ),
@@ -77,7 +76,7 @@ class _Estatistica extends StatelessWidget {
     required this.rotulo,
   });
 
-  final String icone;
+  final IconData icone;
   final String valor;
   final String rotulo;
 
@@ -93,11 +92,7 @@ class _Estatistica extends StatelessWidget {
         ),
         child: Column(
           children: [
-            IconeSvg(
-              icone,
-              tamanho: AppSizes.iconeResumo,
-              cor: AppColors.primaria,
-            ),
+            Icon(icone, size: AppSizes.iconeResumo, color: AppColors.primaria),
             const SizedBox(height: AppSpacing.xs),
             FittedBox(
               fit: BoxFit.scaleDown,

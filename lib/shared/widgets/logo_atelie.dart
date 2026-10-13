@@ -20,7 +20,7 @@ class LogoAtelie extends StatelessWidget {
         boxShadow: AppShadows.logo,
       ),
       child: SvgPicture.asset(
-        AppAssets.logoCarretel,
+        AppAssets.logo,
         width: AppSizes.logoIcone,
         height: AppSizes.logoIcone,
       ),

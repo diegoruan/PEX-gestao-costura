@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/theme/app_assets.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
+import '../../../../core/theme/app_icons.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/utils/formatadores.dart';
-import '../../../../shared/widgets/icone_svg.dart';
 import '../../bloc/historico_bloc.dart';
 
 /// Chips "Todos", "Clientes" e "Por data". Com um filtro ativo, o chip mostra
@@ -58,7 +57,7 @@ class FiltrosHistorico extends StatelessWidget {
                 ? 'Por data'
                 : '${Formatadores.diaMes(periodo.inicio)} – '
                       '${Formatadores.diaMes(periodo.fim)}',
-            icone: AppAssets.iconeCalendarioPequeno,
+            icone: AppIcons.calendario,
             selecionado: periodo != null,
             onTap: () => _escolherPeriodo(context),
           ),
@@ -152,7 +151,7 @@ class _Chip extends StatelessWidget {
   final String texto;
   final bool selecionado;
   final VoidCallback onTap;
-  final String? icone;
+  final IconData? icone;
 
   @override
   Widget build(BuildContext context) {
@@ -181,7 +180,7 @@ class _Chip extends StatelessWidget {
               spacing: AppSpacing.xsm,
               children: [
                 if (icone != null)
-                  IconeSvg(icone!, tamanho: AppSizes.iconeMinimo, cor: cor),
+                  Icon(icone!, size: AppSizes.iconeMinimo, color: cor),
                 Text(texto, style: AppTextStyles.chip.copyWith(color: cor)),
               ],
             ),

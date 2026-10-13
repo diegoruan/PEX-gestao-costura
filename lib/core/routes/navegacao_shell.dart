@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../shared/widgets/barra_navegacao.dart';
-import '../theme/app_assets.dart';
+import '../theme/app_icons.dart';
 
 /// Ordem igual à dos branches do StatefulShellRoute em app_router.dart.
 abstract final class AbasNavegacao {
@@ -13,11 +13,11 @@ abstract final class AbasNavegacao {
   static const fechamento = 4;
 
   static const itens = [
-    ItemNavegacao(icone: AppAssets.iconeCasa, rotulo: 'Início'),
-    ItemNavegacao(icone: AppAssets.iconeCalendario, rotulo: 'Pedidos'),
-    ItemNavegacao(icone: AppAssets.iconePessoas, rotulo: 'Clientes'),
-    ItemNavegacao(icone: AppAssets.iconeDocumento, rotulo: 'Histórico'),
-    ItemNavegacao(icone: AppAssets.iconeGrafico, rotulo: 'Fechamento'),
+    ItemNavegacao(icone: AppIcons.casa, rotulo: 'Início'),
+    ItemNavegacao(icone: AppIcons.calendario, rotulo: 'Pedidos'),
+    ItemNavegacao(icone: AppIcons.pessoas, rotulo: 'Clientes'),
+    ItemNavegacao(icone: AppIcons.documento, rotulo: 'Histórico'),
+    ItemNavegacao(icone: AppIcons.grafico, rotulo: 'Fechamento'),
   ];
 }
 

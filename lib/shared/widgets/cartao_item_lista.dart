@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../core/theme/app_assets.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_dimens.dart';
+import '../../core/theme/app_icons.dart';
 import '../../core/theme/app_text_styles.dart';
-import 'icone_svg.dart';
 
 /// Linha clicável de uma lista (cliente, pedido...): [inicio] à esquerda,
 /// título e conteúdo no meio e uma seta à direita.
@@ -58,9 +57,10 @@ class CartaoItemLista extends StatelessWidget {
                     ],
                   ),
                 ),
-                const IconeSvg(
-                  AppAssets.iconeChevron,
-                  tamanho: AppSizes.iconePequeno,
+                const Icon(
+                  AppIcons.avancar,
+                  size: AppSizes.iconePequeno,
+                  color: AppColors.begeEscuro,
                 ),
               ],
             ),

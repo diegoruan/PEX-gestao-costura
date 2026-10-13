@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/app_assets.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
+import '../../../../core/theme/app_icons.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../../../shared/widgets/icone_svg.dart';
 import '../../../../shared/widgets/link_texto.dart';
 
 /// Faixa rosada com sino, como o "Entregas para hoje" da lista. Passe [cor]
@@ -40,10 +39,10 @@ class AvisoPedido extends StatelessWidget {
       child: Row(
         spacing: AppSpacing.smd,
         children: [
-          IconeSvg(
-            AppAssets.iconeSino,
-            tamanho: AppSizes.iconeResumo,
-            cor: cor,
+          Icon(
+            AppIcons.sino,
+            size: AppSizes.iconeResumo,
+            color: cor ?? AppColors.primaria,
           ),
           Expanded(
             child: Column(

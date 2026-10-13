@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/theme/app_assets.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
+import '../../../../core/theme/app_icons.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../shared/widgets/dialogo_confirmacao.dart';
-import '../../../../shared/widgets/icone_svg.dart';
 import '../../../auth/bloc/auth_bloc.dart';
 
 /// Faixa rosa do topo: marca, saudação e o botão de sair.
@@ -39,10 +40,11 @@ class CabecalhoHome extends StatelessWidget {
                 Row(
                   spacing: AppSpacing.smd,
                   children: [
-                    const _CaixaTranslucida(
-                      child: IconeSvg(
-                        AppAssets.iconeCarretel,
-                        tamanho: AppSizes.iconeResumo,
+                    _CaixaTranslucida(
+                      child: SvgPicture.asset(
+                        AppAssets.logo,
+                        width: AppSizes.iconeResumo,
+                        height: AppSizes.iconeResumo,
                       ),
                     ),
                     const Expanded(
@@ -63,7 +65,7 @@ class CabecalhoHome extends StatelessWidget {
                       child: _CaixaTranslucida(
                         onTap: () => _sair(context),
                         child: const Icon(
-                          Icons.logout,
+                          AppIcons.sair,
                           size: AppSizes.iconeBotao,
                           color: AppColors.textoSobrePrimaria,
                         ),

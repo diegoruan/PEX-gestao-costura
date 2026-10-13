@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/app_assets.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
+import '../../../../core/theme/app_icons.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/utils/formatadores.dart';
-import '../../../../shared/widgets/icone_svg.dart';
 
 /// Linha de um [CartaoFormulario] que abre uma escolha ao ser tocada
 /// (cliente, data...). É um FormField para validar junto com os outros
@@ -247,7 +246,11 @@ class CartaoTotal extends StatelessWidget {
               ],
             ),
           ),
-          const IconeSvg(AppAssets.iconeAlvo, tamanho: AppSizes.iconeTotal),
+          const Icon(
+            AppIcons.alvo,
+            size: AppSizes.iconeTotal,
+            color: AppColors.textoSobrePrimaria,
+          ),
         ],
       ),
     );

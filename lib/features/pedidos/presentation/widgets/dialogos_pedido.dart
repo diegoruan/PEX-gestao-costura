@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../../clientes/domain/cliente.dart';
 import '../../../../shared/widgets/avatar_iniciais.dart';
+import '../../../clientes/domain/cliente.dart';
 
 enum RespostaFalhaFoto { tentarDeNovo, salvarSemFoto }
 

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/app_assets.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
+import '../../../../core/theme/app_icons.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/utils/formatadores.dart';
-import '../../../../shared/widgets/icone_svg.dart';
 
 /// "‹  Agosto 2026  ›". [onProximo] nulo desabilita a seta da direita.
 class SeletorMes extends StatelessWidget {
@@ -28,13 +27,13 @@ class SeletorMes extends StatelessWidget {
       children: [
         _BotaoSeta(
           descricao: 'Mês anterior',
-          icone: AppAssets.iconeChevronEsquerda,
+          icone: AppIcons.voltar,
           onPressed: onAnterior,
         ),
         Text(Formatadores.mesAnoTitulo(mes), style: AppTextStyles.tituloMes),
         _BotaoSeta(
           descricao: 'Próximo mês',
-          icone: AppAssets.iconeChevron,
+          icone: AppIcons.avancar,
           onPressed: onProximo,
         ),
       ],
@@ -50,7 +49,7 @@ class _BotaoSeta extends StatelessWidget {
   });
 
   final String descricao;
-  final String icone;
+  final IconData icone;
   final VoidCallback? onPressed;
 
   @override
@@ -66,10 +65,10 @@ class _BotaoSeta extends StatelessWidget {
           child: SizedBox.square(
             dimension: AppSizes.botaoIcone,
             child: Center(
-              child: IconeSvg(
+              child: Icon(
                 icone,
-                tamanho: AppSizes.iconePequeno,
-                cor: onPressed == null
+                size: AppSizes.iconePequeno,
+                color: onPressed == null
                     ? AppColors.placeholder
                     : AppColors.textoPrincipal,
               ),

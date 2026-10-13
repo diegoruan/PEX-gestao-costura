@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/app_assets.dart';
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
+import '../../../../core/theme/app_icons.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../shared/widgets/avatar_iniciais.dart';
 import '../../../../shared/widgets/cartao_item_lista.dart';
-import '../../../../shared/widgets/icone_svg.dart';
 import '../../domain/cliente.dart';
 
 class ClienteCard extends StatelessWidget {
@@ -26,9 +26,10 @@ class ClienteCard extends StatelessWidget {
           : Row(
               spacing: AppSpacing.xs,
               children: [
-                const IconeSvg(
-                  AppAssets.iconeTelefone,
-                  tamanho: AppSizes.iconeMinimo,
+                const Icon(
+                  AppIcons.telefone,
+                  size: AppSizes.iconeMinimo,
+                  color: AppColors.textoSecundario,
                 ),
                 Text(telefone, style: AppTextStyles.legenda),
               ],

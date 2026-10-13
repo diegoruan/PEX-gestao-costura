@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../core/theme/app_assets.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_dimens.dart';
+import '../../core/theme/app_icons.dart';
 import '../../core/theme/app_text_styles.dart';
-import 'icone_svg.dart';
 
 class CampoBusca extends StatelessWidget {
   const CampoBusca({super.key, required this.hint, required this.onChanged});
@@ -27,7 +26,11 @@ class CampoBusca extends StatelessWidget {
       child: Row(
         spacing: AppSpacing.smd,
         children: [
-          const IconeSvg(AppAssets.iconeBusca, tamanho: AppSizes.iconePequeno),
+          const Icon(
+            AppIcons.busca,
+            size: AppSizes.iconePequeno,
+            color: AppColors.textoSecundario,
+          ),
           Expanded(
             child: TextField(
               onChanged: onChanged,

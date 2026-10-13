@@ -7,8 +7,9 @@ import 'package:go_router/go_router.dart';
 import '../../../core/errors/falha.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/services/imagem_service.dart';
-import '../../../core/theme/app_assets.dart';
+import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimens.dart';
+import '../../../core/theme/app_icons.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../core/utils/formatadores.dart';
 import '../../../core/utils/moeda_input_formatter.dart';
@@ -20,7 +21,6 @@ import '../../../shared/widgets/cabecalho_pagina.dart';
 import '../../../shared/widgets/campo_texto.dart';
 import '../../../shared/widgets/cartao_formulario.dart';
 import '../../../shared/widgets/estado_mensagem.dart';
-import '../../../shared/widgets/icone_svg.dart';
 import '../../../shared/widgets/indicador_carregando.dart';
 import '../../../shared/widgets/link_texto.dart';
 import '../../../shared/widgets/rotulo_secao.dart';
@@ -370,9 +370,10 @@ class _PedidoFormPageState extends State<PedidoFormPage> {
                   enabled: !ocupado,
                   escolher: _escolherData,
                   onChanged: (data) => _dataEntrega = data,
-                  fim: const IconeSvg(
-                    AppAssets.iconeCalendario,
-                    tamanho: AppSizes.iconeResumo,
+                  fim: const Icon(
+                    AppIcons.calendario,
+                    size: AppSizes.iconeResumo,
+                    color: AppColors.textoSecundario,
                   ),
                   conteudo: (data) => data == null
                       ? Text(
@@ -407,9 +408,10 @@ class _PedidoFormPageState extends State<PedidoFormPage> {
             const SizedBox(height: AppSpacing.xxl * 2),
             BotaoPrimario(
               texto: 'Salvar Pedido',
-              icone: const IconeSvg(
-                AppAssets.iconeSalvar,
-                tamanho: AppSizes.iconeBotao,
+              icone: const Icon(
+                AppIcons.salvar,
+                size: AppSizes.iconeBotao,
+                color: AppColors.textoSobrePrimaria,
               ),
               carregando: salvando,
               onPressed: ocupado ? null : _salvar,
@@ -449,9 +451,10 @@ class _PedidoFormPageState extends State<PedidoFormPage> {
                 ? null
                 : (id: cliente.id, nome: cliente.nome);
           },
-          fim: const IconeSvg(
-            AppAssets.iconeChevron,
-            tamanho: AppSizes.iconePequeno,
+          fim: const Icon(
+            AppIcons.avancar,
+            size: AppSizes.iconePequeno,
+            color: AppColors.begeEscuro,
           ),
           conteudo: (cliente) {
             if (cliente != null) {

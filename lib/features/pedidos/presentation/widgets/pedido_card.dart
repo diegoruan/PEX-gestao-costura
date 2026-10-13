@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/app_assets.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimens.dart';
+import '../../../../core/theme/app_icons.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/utils/formatadores.dart';
 import '../../../../shared/widgets/etiqueta.dart';
-import '../../../../shared/widgets/icone_svg.dart';
-import '../../domain/pedido.dart';
 import '../../../../shared/widgets/foto_pedido.dart';
+import '../../domain/pedido.dart';
 
 class PedidoCard extends StatelessWidget {
   const PedidoCard({
@@ -113,11 +112,11 @@ class _Informacoes extends StatelessWidget {
             spacing: AppSpacing.smd,
             children: [
               _Meta(
-                icone: AppAssets.iconeQuantidade,
+                icone: AppIcons.quantidade,
                 texto: Formatadores.pecas(pedido.quantidade),
               ),
               _Meta(
-                icone: AppAssets.iconeCalendarioPequeno,
+                icone: AppIcons.calendario,
                 texto: Formatadores.diaMes(pedido.dataEntrega),
               ),
             ],
@@ -131,7 +130,7 @@ class _Informacoes extends StatelessWidget {
 class _Meta extends StatelessWidget {
   const _Meta({required this.icone, required this.texto});
 
-  final String icone;
+  final IconData icone;
   final String texto;
 
   @override
@@ -140,11 +139,7 @@ class _Meta extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       spacing: AppSpacing.xs,
       children: [
-        IconeSvg(
-          icone,
-          tamanho: AppSizes.iconeMeta,
-          cor: AppColors.textoSecundario,
-        ),
+        Icon(icone, size: AppSizes.iconeMeta, color: AppColors.textoSecundario),
         Text(texto, style: AppTextStyles.legenda),
       ],
     );

@@ -3,11 +3,10 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../core/theme/app_assets.dart';
 import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_icons.dart';
 import '../../features/pedidos/data/pedido_repository.dart';
 import '../../features/pedidos/domain/pedido.dart';
-import 'icone_svg.dart';
 
 /// Foto do pedido. Sem foto (ou enquanto ela carrega, ou se falhar), mostra
 /// a camiseta do Figma sobre o fundo bege. Usada em pedidos e no histórico.
@@ -19,14 +18,10 @@ class FotoPedido extends StatefulWidget {
     super.key,
     required this.pedido,
     required this.tamanhoIcone,
-    this.iconeGrande = false,
   });
 
   final Pedido pedido;
   final double tamanhoIcone;
-
-  /// O detalhe usa a versão de traço mais fino, desenhada para 100px.
-  final bool iconeGrande;
 
   @override
   State<FotoPedido> createState() => _FotoPedidoState();
@@ -60,11 +55,10 @@ class _FotoPedidoState extends State<FotoPedido> {
     final placeholder = ColoredBox(
       color: AppColors.begeEscuro,
       child: Center(
-        child: IconeSvg(
-          widget.iconeGrande
-              ? AppAssets.iconeCamisetaGrande
-              : AppAssets.iconeCamiseta,
-          tamanho: widget.tamanhoIcone,
+        child: Icon(
+          AppIcons.camiseta,
+          size: widget.tamanhoIcone,
+          color: AppColors.textoSecundario,
         ),
       ),
     );
