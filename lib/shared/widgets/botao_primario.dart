@@ -41,7 +41,18 @@ class BotaoPrimario extends StatelessWidget {
               : Row(
                   mainAxisSize: MainAxisSize.min,
                   spacing: AppSpacing.sm,
-                  children: [?icone, Text(texto)],
+                  // Flexible: textos com nome ("Novo Pedido para ...") podem
+                  // não caber e ganham reticências em vez de estourar.
+                  children: [
+                    ?icone,
+                    Flexible(
+                      child: Text(
+                        texto,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
                 ),
         ),
       ),
