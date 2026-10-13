@@ -14,6 +14,8 @@ import '../../features/clientes/data/cliente_repository.dart';
 import '../../features/clientes/presentation/cliente_detalhe_page.dart';
 import '../../features/clientes/presentation/cliente_form_page.dart';
 import '../../features/clientes/presentation/clientes_page.dart';
+import '../../features/historico/bloc/historico_bloc.dart';
+import '../../features/historico/presentation/historico_page.dart';
 import '../../features/home/presentation/home_page.dart';
 import '../../features/pedidos/bloc/pedidos_bloc.dart';
 import '../../features/pedidos/data/pedido_repository.dart';
@@ -56,6 +58,7 @@ GoRouter criarRouter(AuthBloc authBloc) {
       ),
       _rotasClientes(),
       _rotasPedidos(),
+      _rotaHistorico(),
     ],
   );
 }
@@ -158,6 +161,21 @@ ShellRoute _rotasPedidos() {
         ],
       ),
     ],
+  );
+}
+
+/// Uma tela só, então o HistoricoBloc nasce na própria rota (sem ShellRoute)
+/// e é fechado ao sair dela.
+GoRoute _rotaHistorico() {
+  return GoRoute(
+    name: AppRoutes.historico,
+    path: AppRoutes.historicoPath,
+    builder: (context, state) => BlocProvider(
+      create: (context) =>
+          HistoricoBloc(pedidoRepository: context.read<PedidoRepository>())
+            ..add(const HistoricoIniciado()),
+      child: const HistoricoPage(),
+    ),
   );
 }
 

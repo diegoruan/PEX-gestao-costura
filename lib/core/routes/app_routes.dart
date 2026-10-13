@@ -17,6 +17,8 @@ abstract final class AppRoutes {
   static const pedidoDetalhe = 'pedido-detalhe';
   static const pedidoEditar = 'pedido-editar';
 
+  static const historico = 'historico';
+
   static const splashPath = '/splash';
   static const loginPath = '/login';
   static const cadastroPath = '/cadastro';
@@ -35,6 +37,9 @@ abstract final class AppRoutes {
   static const pedidoNovoPath = 'novo';
   static const pedidoDetalhePath = ':$paramId';
   static const pedidoEditarPath = 'editar';
+
+  /// Só a lista: o Figma não tem tela de detalhe do histórico.
+  static const historicoPath = '/historico';
 
   /// Uso: `context.pushNamed(AppRoutes.clienteDetalhe,
   /// pathParameters: {AppRoutes.paramId: cliente.id})`.

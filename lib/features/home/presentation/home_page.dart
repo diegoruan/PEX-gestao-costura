@@ -44,6 +44,11 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.md),
             BotaoPrimario(
+              texto: 'Histórico',
+              onPressed: () => context.pushNamed(AppRoutes.historico),
+            ),
+            const SizedBox(height: AppSpacing.md),
+            BotaoPrimario(
               texto: 'Sair',
               onPressed: () =>
                   context.read<AuthBloc>().add(const AuthLogoutSolicitado()),
