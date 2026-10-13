@@ -78,6 +78,55 @@ void main() {
     });
   });
 
+  group('Validadores.valorPositivo (formulário de pedido)', () {
+    test('aceita valores maiores que zero no formato da máscara', () {
+      expect(Validadores.valorPositivo('0,01'), isNull);
+      expect(Validadores.valorPositivo('90,00'), isNull);
+      expect(Validadores.valorPositivo('1.234,56'), isNull);
+    });
+
+    test('rejeita vazio e zero', () {
+      expect(Validadores.valorPositivo(null), isNotNull);
+      expect(Validadores.valorPositivo(''), isNotNull);
+      expect(Validadores.valorPositivo('0,00'), isNotNull);
+    });
+  });
+
+  group('Validadores.quantidade (formulário de pedido)', () {
+    test('aceita 1 ou mais', () {
+      expect(Validadores.quantidade(1), isNull);
+      expect(Validadores.quantidade(30), isNull);
+    });
+
+    test('rejeita nulo, zero e negativo', () {
+      expect(Validadores.quantidade(null), isNotNull);
+      expect(Validadores.quantidade(0), isNotNull);
+      expect(Validadores.quantidade(-2), isNotNull);
+    });
+  });
+
+  group('Validadores.selecionado (cliente e data do pedido)', () {
+    final cliente = Validadores.selecionado<String>('Escolha o cliente');
+    final data = Validadores.selecionado<DateTime>('Escolha a data');
+
+    test('exige uma escolha', () {
+      expect(cliente(null), 'Escolha o cliente');
+      expect(data(null), 'Escolha a data');
+    });
+
+    test('aceita qualquer valor escolhido', () {
+      expect(cliente('c1'), isNull);
+      expect(data(DateTime(2026, 9, 3)), isNull);
+    });
+  });
+
+  group('Validadores.nome (nome da peça)', () {
+    test('exige 2 ou mais caracteres', () {
+      expect(Validadores.nome('V'), isNotNull);
+      expect(Validadores.nome('Vestido'), isNull);
+    });
+  });
+
   group('Validadores.confirmacaoSenha', () {
     final validar = Validadores.confirmacaoSenha(() => 'segredo1');
 

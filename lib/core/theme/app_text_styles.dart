@@ -136,6 +136,8 @@ abstract final class AppTextStyles {
 
   static final iniciaisDestaque = iniciais.copyWith(fontSize: 30);
 
+  static final iniciaisCompacto = iniciais.copyWith(fontSize: 12);
+
   static const rotuloLinha = TextStyle(
     fontFamily: fontFamily,
     fontSize: 13,
@@ -170,6 +172,101 @@ abstract final class AppTextStyles {
     fontSize: 15,
     fontWeight: FontWeight.w700,
     color: AppColors.primaria,
+  );
+
+  /// "8 pedidos" no topo da lista; o resto da frase usa [legenda].
+  static const legendaDestaque = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 11.5,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textoPrincipal,
+  );
+
+  static const legendaPequena = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 10,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textoSecundario,
+  );
+
+  /// Valor total no cartão de pedido da lista.
+  static const valorItem = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textoValor,
+  );
+
+  /// Texto das etiquetas de prazo; a cor muda conforme a etiqueta.
+  static const etiqueta = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 10,
+    fontWeight: FontWeight.w700,
+  );
+
+  static const avisoTitulo = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: AppColors.primariaEscura,
+  );
+
+  static const avisoTexto = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 12.5,
+    fontWeight: FontWeight.w400,
+    color: AppColors.primaria,
+  );
+
+  /// Valor dos cartõezinhos de resumo do detalhe (total, quantidade...).
+  static const valorResumo = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textoPrincipal,
+  );
+
+  static const totalRotulo = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textoSobrePrimariaSuave,
+  );
+
+  static const totalValor = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 28,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textoSobrePrimaria,
+  );
+
+  static const totalDetalhe = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 11.5,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textoSobrePrimariaFraco,
+  );
+
+  static const quantidade = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 22,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textoPrincipal,
+  );
+
+  static const botaoQuantidade = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 20,
+    fontWeight: FontWeight.w700,
+    color: AppColors.primaria,
+  );
+
+  /// Botão branco ao lado do principal, como o "Editar" do detalhe.
+  static const botaoSecundario = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textoPrincipal,
   );
 
   static const snackbar = TextStyle(

@@ -9,4 +9,17 @@ abstract final class AppAssets {
   static const iconeEditar = 'assets/images/icone_editar.svg';
   static const iconeMais = 'assets/images/icone_mais.svg';
   static const iconeLixeira = 'assets/images/icone_lixeira.svg';
+  static const iconeCamiseta = 'assets/images/icone_camiseta.svg';
+  static const iconeCamisetaGrande = 'assets/images/icone_camiseta_grande.svg';
+  static const iconeQuantidade = 'assets/images/icone_quantidade.svg';
+  static const iconeCalendario = 'assets/images/icone_calendario.svg';
+  static const iconeCalendarioPequeno =
+      'assets/images/icone_calendario_pequeno.svg';
+  static const iconeSino = 'assets/images/icone_sino.svg';
+  static const iconeCamera = 'assets/images/icone_camera.svg';
+  static const iconeAlvo = 'assets/images/icone_alvo.svg';
+  static const iconeDolar = 'assets/images/icone_dolar.svg';
+  static const iconeEtiqueta = 'assets/images/icone_etiqueta.svg';
+  static const iconeCheck = 'assets/images/icone_check.svg';
+  static const iconeSalvar = 'assets/images/icone_salvar.svg';
 }

@@ -6,6 +6,7 @@ abstract final class AppColors {
   static const primaria = Color(0xFFC9788A);
   static const primariaClara = Color(0xFFF2D7DD);
   static const primariaSuave = Color(0xFFFCE4E8);
+  static const primariaEscura = Color(0xFF8B3C4F);
 
   static const fundo = Color(0xFFF2EBE3);
   static const superficie = Color(0xFFFFFFFF);
@@ -18,6 +19,8 @@ abstract final class AppColors {
   static const textoValor = Color(0xFF7A5C4F);
   static const placeholder = Color(0xFFC8B8B0);
   static const textoSobrePrimaria = Color(0xFFFFFFFF);
+  static const textoSobrePrimariaSuave = Color(0xCCFFFFFF);
+  static const textoSobrePrimariaFraco = Color(0xB3FFFFFF);
 
   static const divisoria = Color(0xFFF5EDE7);
   static const borda = Color(0xFFEEE7E0);
@@ -30,6 +33,12 @@ abstract final class AppColors {
   static const erro = Color(0xFFB3424A);
 
   static const sombra = textoPrincipal;
+
+  /// Botões e degradê por cima da foto do pedido (topo do detalhe).
+  static const sobreFoto = Color(0x40FFFFFF);
+  static const fotoSombraTopo = Color(0x59000000);
+  static const fotoSombraBase = Color(0x80000000);
+  static const transparente = Color(0x00000000);
 
   /// Fundos dos avatares de iniciais, na ordem usada no Figma.
   static const avatares = [primaria, textoValor, alerta, sucesso];

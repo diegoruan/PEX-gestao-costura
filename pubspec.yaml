@@ -45,7 +45,8 @@ dependencies:
     sdk: flutter
   cloud_firestore: ^6.10.0
   bloc_concurrency: ^0.3.0
-
+  image_picker: ^1.2.3
+  flutter_image_compress: ^2.5.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

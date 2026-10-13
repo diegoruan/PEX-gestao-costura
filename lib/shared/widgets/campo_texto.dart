@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_dimens.dart';
@@ -22,6 +23,7 @@ class CampoTexto extends StatefulWidget {
     this.textCapitalization = TextCapitalization.none,
     this.minLines,
     this.maxLines = 1,
+    this.inputFormatters,
   }) : assert(!senha || maxLines == 1, 'Campo de senha tem uma linha só');
 
   final String rotulo;
@@ -39,6 +41,9 @@ class CampoTexto extends StatefulWidget {
   /// Para textos longos (observações), use `minLines: 3, maxLines: null`.
   final int? minLines;
   final int? maxLines;
+
+  /// Máscaras, como o `MoedaInputFormatter` do valor do pedido.
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   State<CampoTexto> createState() => _CampoTextoState();
@@ -70,6 +75,7 @@ class _CampoTextoState extends State<CampoTexto> {
             textCapitalization: widget.textCapitalization,
             minLines: widget.minLines,
             maxLines: widget.maxLines,
+            inputFormatters: widget.inputFormatters,
             autocorrect: !widget.senha,
             enableSuggestions: !widget.senha,
             style: AppTextStyles.textoCampo,

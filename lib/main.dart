@@ -4,8 +4,10 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
 import 'app.dart';
+import 'core/services/imagem_service.dart';
 import 'features/auth/data/auth_repository.dart';
 import 'features/clientes/data/cliente_repository.dart';
+import 'features/pedidos/data/pedido_repository.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -16,10 +18,13 @@ Future<void> main() async {
   Intl.defaultLocale = 'pt_BR';
   await initializeDateFormatting('pt_BR');
 
+  final imagemService = ImagemServiceFirestore();
   runApp(
     App(
       authRepository: AuthRepository(),
       clienteRepository: ClienteRepository(),
+      pedidoRepository: PedidoRepository(imagemService: imagemService),
+      imagemService: imagemService,
     ),
   );
 }

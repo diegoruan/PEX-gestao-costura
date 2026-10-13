@@ -10,6 +10,7 @@ class BotaoPrimario extends StatelessWidget {
     required this.texto,
     required this.onPressed,
     this.carregando = false,
+    this.icone,
   });
 
   final String texto;
@@ -17,6 +18,9 @@ class BotaoPrimario extends StatelessWidget {
 
   /// Enquanto `true`, o botão fica desabilitado e mostra um indicador.
   final bool carregando;
+
+  /// Ícone opcional antes do texto, como o disquete de "Salvar Pedido".
+  final Widget? icone;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +38,11 @@ class BotaoPrimario extends StatelessWidget {
                   tamanho: AppSizes.indicadorBotao,
                   cor: AppColors.textoSobrePrimaria,
                 )
-              : Text(texto),
+              : Row(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: AppSpacing.sm,
+                  children: [?icone, Text(texto)],
+                ),
         ),
       ),
     );

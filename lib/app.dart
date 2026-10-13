@@ -7,17 +7,26 @@ import 'core/routes/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'features/auth/bloc/auth_bloc.dart';
 import 'features/auth/data/auth_repository.dart';
+import 'core/services/imagem_service.dart';
 import 'features/clientes/data/cliente_repository.dart';
+import 'features/pedidos/data/pedido_repository.dart';
 
 class App extends StatefulWidget {
   const App({
     super.key,
     required this.authRepository,
     required this.clienteRepository,
+    required this.pedidoRepository,
+    required this.imagemService,
   });
 
   final AuthRepository authRepository;
   final ClienteRepository clienteRepository;
+  final PedidoRepository pedidoRepository;
+
+  /// Exposto para o formulário de pedido escolher a foto; o envio fica com o
+  /// PedidoRepository.
+  final ImagemService imagemService;
 
   @override
   State<App> createState() => _AppState();
@@ -46,6 +55,10 @@ class _AppState extends State<App> {
         RepositoryProvider<ClienteRepository>.value(
           value: widget.clienteRepository,
         ),
+        RepositoryProvider<PedidoRepository>.value(
+          value: widget.pedidoRepository,
+        ),
+        RepositoryProvider<ImagemService>.value(value: widget.imagemService),
       ],
       child: MultiBlocProvider(
         providers: [BlocProvider<AuthBloc>.value(value: _authBloc)],

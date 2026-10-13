@@ -6,11 +6,15 @@ import '../../core/theme/app_text_styles.dart';
 
 /// Pergunta antes de uma ação irreversível. Devolve `true` só se o usuário
 /// confirmar (fechar o diálogo tocando fora conta como cancelar).
+///
+/// Com `destrutiva: false` o botão de confirmar fica na cor principal em vez
+/// de vermelho (ex.: finalizar um pedido).
 Future<bool> confirmarAcao(
   BuildContext context, {
   required String titulo,
   required String mensagem,
   required String textoConfirmar,
+  bool destrutiva = true,
 }) async {
   final confirmou = await showDialog<bool>(
     context: context,
@@ -31,7 +35,9 @@ Future<bool> confirmarAcao(
         ),
         TextButton(
           onPressed: () => Navigator.of(context).pop(true),
-          style: TextButton.styleFrom(foregroundColor: AppColors.erro),
+          style: TextButton.styleFrom(
+            foregroundColor: destrutiva ? AppColors.erro : AppColors.primaria,
+          ),
           child: Text(textoConfirmar),
         ),
       ],

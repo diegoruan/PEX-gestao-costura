@@ -8,18 +8,30 @@ import '../../core/utils/texto.dart';
 /// Círculo com as iniciais do nome. A cor sai do próprio nome, então a mesma
 /// pessoa tem sempre a mesma cor em qualquer tela.
 class AvatarIniciais extends StatelessWidget {
-  const AvatarIniciais({super.key, required this.nome, this.destaque = false});
+  const AvatarIniciais({
+    super.key,
+    required this.nome,
+    this.destaque = false,
+    this.compacto = false,
+  }) : assert(!destaque || !compacto, 'Escolha só um tamanho');
 
   final String nome;
 
   /// Versão grande (80px, com borda branca e sombra) do topo do detalhe.
   final bool destaque;
 
+  /// Versão pequena (28px), como a do cliente escolhido no pedido.
+  final bool compacto;
+
   @override
   Widget build(BuildContext context) {
     final soma = Texto.normalizar(nome).codeUnits.fold(0, (a, b) => a + b);
     final cor = AppColors.avatares[soma % AppColors.avatares.length];
-    final tamanho = destaque ? AppSizes.avatarDestaque : AppSizes.avatarLista;
+    final tamanho = destaque
+        ? AppSizes.avatarDestaque
+        : compacto
+        ? AppSizes.avatarCompacto
+        : AppSizes.avatarLista;
 
     return Container(
       width: tamanho,
@@ -40,6 +52,8 @@ class AvatarIniciais extends StatelessWidget {
         Texto.iniciais(nome),
         style: destaque
             ? AppTextStyles.iniciaisDestaque
+            : compacto
+            ? AppTextStyles.iniciaisCompacto
             : AppTextStyles.iniciais,
       ),
     );
