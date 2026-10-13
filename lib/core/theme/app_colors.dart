@@ -40,6 +40,9 @@ abstract final class AppColors {
   static const fotoSombraBase = Color(0x80000000);
   static const transparente = Color(0x00000000);
 
+  /// Fundo quase invisível dos botões do seletor de mês do fechamento.
+  static const superficieSutil = Color(0x33FFFFFF);
+
   /// Fundos dos avatares de iniciais, na ordem usada no Figma.
   static const avatares = [primaria, textoValor, alerta, sucesso];
 }

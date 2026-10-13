@@ -6,6 +6,8 @@ abstract final class AppAssets {
   static const iconeEmail = 'assets/images/icone_email.svg';
   static const iconeEndereco = 'assets/images/icone_endereco.svg';
   static const iconeChevron = 'assets/images/icone_chevron.svg';
+  static const iconeChevronEsquerda =
+      'assets/images/icone_chevron_esquerda.svg';
   static const iconeEditar = 'assets/images/icone_editar.svg';
   static const iconeMais = 'assets/images/icone_mais.svg';
   static const iconeLixeira = 'assets/images/icone_lixeira.svg';
@@ -22,4 +24,6 @@ abstract final class AppAssets {
   static const iconeEtiqueta = 'assets/images/icone_etiqueta.svg';
   static const iconeCheck = 'assets/images/icone_check.svg';
   static const iconeSalvar = 'assets/images/icone_salvar.svg';
+  static const iconePacote = 'assets/images/icone_pacote.svg';
+  static const iconeClientes = 'assets/images/icone_clientes.svg';
 }

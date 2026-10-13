@@ -323,6 +323,70 @@ abstract final class AppTextStyles {
     color: AppColors.textoSecundario,
   );
 
+  /// Mês no seletor do fechamento ("Agosto 2026").
+  static const tituloMes = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 20,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textoPrincipal,
+  );
+
+  /// Textos de apoio dos totais do fechamento ("Total do mês").
+  static const legendaValor = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textoValor,
+  );
+
+  /// Total do mês no topo do fechamento.
+  static const totalDestaque = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 40,
+    fontWeight: FontWeight.w700,
+    letterSpacing: -1,
+    color: AppColors.primaria,
+  );
+
+  /// Total geral no cartão do fim do fechamento.
+  static const totalGeral = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 34,
+    fontWeight: FontWeight.w700,
+    color: AppColors.primaria,
+  );
+
+  /// Números dos cartõezinhos do fechamento (peças, clientes, referência).
+  static const numeroEstatistica = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
+    color: AppColors.primaria,
+  );
+
+  /// Nome da peça nas linhas de detalhe do cliente.
+  static const textoDetalhe = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 12.5,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textoPrincipal,
+  );
+
+  static const valorDetalhe = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 12.5,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textoValor,
+  );
+
+  /// Selo "Fechado" do total geral.
+  static const selo = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 13,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textoValor,
+  );
+
   static const snackbar = TextStyle(
     fontFamily: fontFamily,
     fontSize: 14,

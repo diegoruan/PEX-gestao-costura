@@ -18,6 +18,7 @@ abstract final class AppRoutes {
   static const pedidoEditar = 'pedido-editar';
 
   static const historico = 'historico';
+  static const fechamento = 'fechamento';
 
   static const splashPath = '/splash';
   static const loginPath = '/login';
@@ -40,6 +41,7 @@ abstract final class AppRoutes {
 
   /// Só a lista: o Figma não tem tela de detalhe do histórico.
   static const historicoPath = '/historico';
+  static const fechamentoPath = '/fechamento';
 
   /// Uso: `context.pushNamed(AppRoutes.clienteDetalhe,
   /// pathParameters: {AppRoutes.paramId: cliente.id})`.
