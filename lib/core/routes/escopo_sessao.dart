@@ -5,6 +5,7 @@ import '../../features/clientes/bloc/clientes_bloc.dart';
 import '../../features/clientes/data/cliente_repository.dart';
 import '../../features/fechamento/bloc/fechamento_bloc.dart';
 import '../../features/historico/bloc/historico_bloc.dart';
+import '../../features/home/bloc/home_bloc.dart';
 import '../../features/pedidos/bloc/pedidos_bloc.dart';
 import '../../features/pedidos/data/pedido_repository.dart';
 
@@ -26,6 +27,11 @@ class EscopoSessao extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) =>
+              HomeBloc(pedidoRepository: context.read<PedidoRepository>())
+                ..add(const HomeIniciado()),
+        ),
         // Um só ClientesBloc para a área de clientes e para o formulário de
         // pedido, que lista os clientes ativos.
         BlocProvider(
