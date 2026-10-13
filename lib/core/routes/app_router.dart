@@ -8,6 +8,7 @@ import '../../features/auth/presentation/cadastro_page.dart';
 import '../../features/auth/presentation/login_page.dart';
 import '../../features/auth/presentation/recuperar_senha_page.dart';
 import '../../features/auth/presentation/splash_page.dart';
+import '../../features/clientes/domain/cliente.dart';
 import '../../features/clientes/presentation/cliente_detalhe_page.dart';
 import '../../features/clientes/presentation/cliente_form_page.dart';
 import '../../features/clientes/presentation/clientes_page.dart';
@@ -151,7 +152,9 @@ GoRoute _rotasPedidos(GlobalKey<NavigatorState> sessaoKey) {
         parentNavigatorKey: sessaoKey,
         name: AppRoutes.pedidoNovo,
         path: AppRoutes.pedidoNovoPath,
-        builder: (context, state) => const PedidoFormPage(),
+        // O detalhe do cliente pode mandar o cliente já escolhido.
+        builder: (context, state) =>
+            PedidoFormPage(clienteInicial: state.extra as Cliente?),
       ),
       GoRoute(
         parentNavigatorKey: sessaoKey,

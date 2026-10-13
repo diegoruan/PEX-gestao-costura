@@ -26,6 +26,7 @@ import '../../../shared/widgets/link_texto.dart';
 import '../../../shared/widgets/rotulo_secao.dart';
 import '../../../shared/widgets/snackbar_mensagem.dart';
 import '../../clientes/bloc/clientes_bloc.dart';
+import '../../clientes/domain/cliente.dart';
 import '../bloc/pedidos_bloc.dart';
 import '../domain/pedido.dart';
 import 'widgets/aviso_pedido.dart';
@@ -37,9 +38,13 @@ typedef _ClienteEscolhido = ({String id, String nome});
 
 /// Cadastro (sem [pedidoId]) e edição (com [pedidoId]) na mesma tela.
 class PedidoFormPage extends StatefulWidget {
-  const PedidoFormPage({super.key, this.pedidoId});
+  const PedidoFormPage({super.key, this.pedidoId, this.clienteInicial});
 
   final String? pedidoId;
+
+  /// No cadastro, já vem escolhido (ex.: "Novo Pedido para Ana Clara" no
+  /// detalhe do cliente). Ignorado na edição.
+  final Cliente? clienteInicial;
 
   bool get edicao => pedidoId != null;
 
@@ -70,6 +75,10 @@ class _PedidoFormPageState extends State<PedidoFormPage> {
   @override
   void initState() {
     super.initState();
+    final inicial = widget.clienteInicial;
+    if (!widget.edicao && inicial != null) {
+      _cliente = (id: inicial.id, nome: inicial.nome);
+    }
     _preencherSeEdicao(context.read<PedidosBloc>().state);
   }
 
