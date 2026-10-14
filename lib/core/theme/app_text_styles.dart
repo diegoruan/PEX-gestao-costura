@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
 
-/// Tipografia do Figma. Todas as telas usam a família Inter (em assets/fonts).
+/// Tipografia do Figma. Por enquanto com a fonte do sistema (Roboto no
+/// Android, San Francisco no iOS); para voltar à Inter, use 'Inter' aqui e
+/// declare os arquivos de assets/fonts no pubspec.yaml.
 abstract final class AppTextStyles {
-  static const fontFamily = 'Inter';
+  static const String? fontFamily = null;
 
   static const marca = TextStyle(
     fontFamily: fontFamily,
